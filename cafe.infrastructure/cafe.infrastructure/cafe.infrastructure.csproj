@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\cafe.Domain\cafe.Domain\cafe.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Features\" />
+    <None Remove="Features\Category\" />
+    <None Remove="Features\Category\Repository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\" />
+    <Folder Include="Features\Category\" />
+    <Folder Include="Features\Category\Repository\" />
+  </ItemGroup>
+</Project>

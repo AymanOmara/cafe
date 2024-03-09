@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Category\" />
+    <None Remove="Meal\" />
+    <None Remove="Category\Enttity\" />
+    <None Remove="Category\Repository\" />
+    <None Remove="Category\Service\" />
+    <None Remove="Meal\Entity\" />
+    <None Remove="Meal\Repository\" />
+    <None Remove="Meal\Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Category\" />
+    <Folder Include="Meal\" />
+    <Folder Include="Category\Enttity\" />
+    <Folder Include="Category\Repository\" />
+    <Folder Include="Category\Service\" />
+    <Folder Include="Meal\Entity\" />
+    <Folder Include="Meal\Repository\" />
+    <Folder Include="Meal\Service\" />
+  </ItemGroup>
+</Project>
