@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cafe.infrastructure", "cafe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cafe", "cafe\cafe\cafe.csproj", "{BE45340D-073C-422B-949B-354902E9C47E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cafe.Ioc", "cafe.Ioc\cafe.Ioc.csproj", "{72308717-523C-4C7C-8AC1-25A4F805A477}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BE45340D-073C-422B-949B-354902E9C47E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE45340D-073C-422B-949B-354902E9C47E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE45340D-073C-422B-949B-354902E9C47E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72308717-523C-4C7C-8AC1-25A4F805A477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72308717-523C-4C7C-8AC1-25A4F805A477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72308717-523C-4C7C-8AC1-25A4F805A477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72308717-523C-4C7C-8AC1-25A4F805A477}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

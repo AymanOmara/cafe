@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -15,6 +15,9 @@
     <None Remove="Meal\Entity\" />
     <None Remove="Meal\Repository\" />
     <None Remove="Meal\Service\" />
+    <None Remove="Users\" />
+    <None Remove="Users\entity\" />
+    <None Remove="Category\DTO\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Category\" />
@@ -25,5 +28,13 @@
     <Folder Include="Meal\Entity\" />
     <Folder Include="Meal\Repository\" />
     <Folder Include="Meal\Service\" />
+    <Folder Include="Users\" />
+    <Folder Include="Users\entity\" />
+    <Folder Include="Category\DTO\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
   </ItemGroup>
 </Project>

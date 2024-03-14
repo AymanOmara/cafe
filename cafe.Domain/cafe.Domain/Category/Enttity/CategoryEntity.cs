@@ -8,8 +8,7 @@ namespace cafe.Domain.Category
 
 		public string Name { get; set; } = string.Empty;
 
-		public ICollection<MealEntity>? Meals { get; set; }
-
+        public ICollection<MealEntity>? Meals { get; set; }
 	}
 }
 
