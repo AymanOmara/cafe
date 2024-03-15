@@ -1,9 +1,11 @@
 ﻿using cafe.Domain.Category.DTO;
 using cafe.Domain.Category.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cafe.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class CategoryController : Controller
     {
@@ -37,7 +39,8 @@ namespace cafe.Controllers
             }
         }
         [HttpDelete("Delete")]
-        public ActionResult DeleteCategory([FromBody] UpdateCategoryDTO updateCategoryDto) {
+        public ActionResult DeleteCategory([FromBody] UpdateCategoryDTO updateCategoryDto)
+        {
             try
             {
                 _service.DeleteCategory(updateCategoryDto);

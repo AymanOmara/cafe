@@ -17,6 +17,8 @@ public class DependancyContainer
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
+
+        
         /// ********* Category **********
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();

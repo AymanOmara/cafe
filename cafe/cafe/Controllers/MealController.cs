@@ -1,9 +1,11 @@
 ﻿using cafe.Domain.Meal.DTO;
 using cafe.Domain.Meal.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cafe.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class MealController : Controller
     {

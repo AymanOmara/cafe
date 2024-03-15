@@ -7,7 +7,6 @@ namespace cafe.Domain.Users.entity
         public String Token { get; set; } = String.Empty;
 
         public String RefreshToken { get; set; } = String.Empty;
-
     }
 }
 

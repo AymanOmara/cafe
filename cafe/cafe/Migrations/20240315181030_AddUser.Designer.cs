@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cafe.infrastructure;
 
@@ -11,9 +12,11 @@ using cafe.infrastructure;
 namespace cafe.Migrations
 {
     [DbContext(typeof(CafeDbContext))]
-    partial class CafeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240315181030_AddUser")]
+    partial class AddUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,62 +175,6 @@ namespace cafe.Migrations
                     b.ToTable("Catgeories");
                 });
 
-            modelBuilder.Entity("cafe.Domain.Employee.EmployeeEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BaseSalary")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("cafe.Domain.Employee.SalaryItemEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("nvarchar(21)");
-
-                    b.Property<string>("Reason")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SalaryItemEntity");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("SalaryItemEntity");
-
-                    b.UseTphMappingStrategy();
-                });
-
             modelBuilder.Entity("cafe.Domain.Meal.MealEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -332,36 +279,6 @@ namespace cafe.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("cafe.Domain.Employee.SalaryDeductionEntity", b =>
-                {
-                    b.HasBaseType("cafe.Domain.Employee.SalaryItemEntity");
-
-                    b.Property<int?>("EmployeeEntityId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("EmployeeEntityId");
-
-                    b.ToTable("SalaryItemEntity", t =>
-                        {
-                            t.Property("EmployeeEntityId")
-                                .HasColumnName("SalaryDeductionEntity_EmployeeEntityId");
-                        });
-
-                    b.HasDiscriminator().HasValue("SalaryDeduction");
-                });
-
-            modelBuilder.Entity("cafe.Domain.Employee.SalaryIncentiveEntity", b =>
-                {
-                    b.HasBaseType("cafe.Domain.Employee.SalaryItemEntity");
-
-                    b.Property<int?>("EmployeeEntityId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("EmployeeEntityId");
-
-                    b.HasDiscriminator().HasValue("SalaryIncentive");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -420,30 +337,9 @@ namespace cafe.Migrations
                         .HasForeignKey("CategoryEntityId");
                 });
 
-            modelBuilder.Entity("cafe.Domain.Employee.SalaryDeductionEntity", b =>
-                {
-                    b.HasOne("cafe.Domain.Employee.EmployeeEntity", null)
-                        .WithMany("Deductions")
-                        .HasForeignKey("EmployeeEntityId");
-                });
-
-            modelBuilder.Entity("cafe.Domain.Employee.SalaryIncentiveEntity", b =>
-                {
-                    b.HasOne("cafe.Domain.Employee.EmployeeEntity", null)
-                        .WithMany("Incentive")
-                        .HasForeignKey("EmployeeEntityId");
-                });
-
             modelBuilder.Entity("cafe.Domain.Category.CategoryEntity", b =>
                 {
                     b.Navigation("Meals");
-                });
-
-            modelBuilder.Entity("cafe.Domain.Employee.EmployeeEntity", b =>
-                {
-                    b.Navigation("Deductions");
-
-                    b.Navigation("Incentive");
                 });
 #pragma warning restore 612, 618
         }
