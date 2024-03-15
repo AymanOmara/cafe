@@ -1,4 +1,5 @@
 ﻿using cafe.Domain.Category;
+using cafe.Domain.Meal;
 using Microsoft.EntityFrameworkCore;
 
 namespace cafe.infrastructure
@@ -11,6 +12,8 @@ namespace cafe.infrastructure
         }
 
         public DbSet<CategoryEntity> Catgeories { get; set; }
+
+        public DbSet<MealEntity> Meals { get; set; }
 
     }
 }

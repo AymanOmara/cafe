@@ -10,11 +10,13 @@
     <None Remove="Features\" />
     <None Remove="Features\Category\" />
     <None Remove="Features\Category\Service\" />
+    <None Remove="Features\Meal\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
     <Folder Include="Features\Category\" />
     <Folder Include="Features\Category\Service\" />
+    <Folder Include="Features\Meal\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\cafe.Domain\cafe.Domain\cafe.Domain.csproj" />

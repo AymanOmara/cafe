@@ -13,11 +13,15 @@
     <None Remove="Features\" />
     <None Remove="Features\Category\" />
     <None Remove="Features\Category\Repository\" />
+    <None Remove="Features\Meal\" />
+    <None Remove="Features\Meal\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
     <Folder Include="Features\Category\" />
     <Folder Include="Features\Category\Repository\" />
+    <Folder Include="Features\Meal\" />
+    <Folder Include="Features\Meal\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />

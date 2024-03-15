@@ -18,6 +18,7 @@
     <None Remove="Users\" />
     <None Remove="Users\entity\" />
     <None Remove="Category\DTO\" />
+    <None Remove="Meal\DTO\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Category\" />
@@ -31,6 +32,7 @@
     <Folder Include="Users\" />
     <Folder Include="Users\entity\" />
     <Folder Include="Category\DTO\" />
+    <Folder Include="Meal\DTO\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
