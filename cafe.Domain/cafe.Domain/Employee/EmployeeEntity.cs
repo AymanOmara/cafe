@@ -10,7 +10,9 @@
 
 		public string PhoneNumber { get; set; } = string.Empty;
 
-		public ICollection<SalaryDeductionEntity>? Deductions { get; set; }
+        public string DeliverdPapers { get; set; } = string.Empty;
+
+        public ICollection<SalaryDeductionEntity>? Deductions { get; set; }
 
 		public ICollection<SalaryIncentiveEntity>? Incentive { get; set; }
     }
