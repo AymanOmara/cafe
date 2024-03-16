@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 /// ********* Auth **********
  builder.Services.AddIdentityApiEndpoints<CafeUser>()
     .AddEntityFrameworkStores<CafeDbContext>();
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme

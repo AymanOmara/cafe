@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace cafe.Domain.Category.DTO
 {
@@ -9,4 +8,3 @@ namespace cafe.Domain.Category.DTO
 		public string Name { get; set; } = null!;
 	}
 }
-

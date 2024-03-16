@@ -6,7 +6,6 @@ namespace cafe.Domain.Category.DTO
 	{
 		public CategoryProfile()
 		{
-
 			CreateMap<CategoryEntity, ReadCategoryDto>();
             CreateMap<CreateCategoryDTO, CategoryEntity>();
             CreateMap<UpdateCategoryDTO, CategoryEntity>();

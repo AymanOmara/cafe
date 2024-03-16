@@ -15,6 +15,8 @@
     <None Remove="Features\Category\Repository\" />
     <None Remove="Features\Meal\" />
     <None Remove="Features\Meal\Repository\" />
+    <None Remove="Features\Employee\" />
+    <None Remove="Features\Employee\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
@@ -22,6 +24,8 @@
     <Folder Include="Features\Category\Repository\" />
     <Folder Include="Features\Meal\" />
     <Folder Include="Features\Meal\Repository\" />
+    <Folder Include="Features\Employee\" />
+    <Folder Include="Features\Employee\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
