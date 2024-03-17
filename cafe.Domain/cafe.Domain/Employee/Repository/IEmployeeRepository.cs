@@ -5,6 +5,8 @@
 		ICollection<EmployeeEntity> GetAllEmployees();
 
 		EmployeeEntity CreateEmployee(EmployeeEntity employeeEntity);
+        EmployeeEntity UpdateEmployee(EmployeeEntity employeeEntity);
+		void DeleteEmployee(EmployeeEntity employeeEntity);
     }
 }
 

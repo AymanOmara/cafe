@@ -1,6 +1,6 @@
 ﻿namespace cafe.Domain.Employee.Dto
 {
-	public class ReadEmployeeDTO
+	public class UpdateEmployeeDTO
 	{
         public int Id { get; set; }
 
@@ -15,11 +15,6 @@
         public ICollection<ReadSalaryItemDto>? Deductions { get; set; }
 
         public ICollection<ReadSalaryItemDto>? Incentive { get; set; }
-
-        public decimal FinalSaray 
-        {
-            get { return 0; }
-        }
     }
 }
 

@@ -29,27 +29,13 @@ namespace cafe.Controllers
         [HttpPut("Update")]
         public ActionResult UpdateCategory([FromBody] UpdateCategoryDTO updateCategoryDto)
         {
-            try
-            {
-                return Ok(_service.UpdateCategory(updateCategoryDto));
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            return Ok(_service.UpdateCategory(updateCategoryDto));
         }
         [HttpDelete("Delete")]
         public ActionResult DeleteCategory([FromBody] UpdateCategoryDTO updateCategoryDto)
         {
-            try
-            {
-                _service.DeleteCategory(updateCategoryDto);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            _service.DeleteCategory(updateCategoryDto);
+            return Ok();
         }
     }
 }

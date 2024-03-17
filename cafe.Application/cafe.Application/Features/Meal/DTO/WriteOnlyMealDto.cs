@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace cafe.Domain.Meal.DTO
+namespace cafe.Application.Features.Meal.DTO
 {
 	public class WriteOnlyMealDto
 	{

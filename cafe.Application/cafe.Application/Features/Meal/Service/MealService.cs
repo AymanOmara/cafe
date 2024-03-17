@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
+using cafe.Application.Features.Meal.Service;
 using cafe.Domain.Meal;
-using cafe.Domain.Meal.DTO;
 using cafe.Domain.Meal.Repository;
-using cafe.Domain.Meal.Service;
+using cafe.Application.Features.Meal.DTO;
 
 namespace cafe.Application.Features.Meal
 {
@@ -25,16 +25,8 @@ namespace cafe.Application.Features.Meal
 
         public void DeleteMeal(UpdateOnlyMealDto dto)
         {
-            try
-            {
-                var mealEntity = _mapper.Map<MealEntity>(dto);
-                _repository.DeleteMeal(mealEntity);
-            }
-            catch
-            {
-                throw new Exception("object not found exception");
-            }
-
+            var mealEntity = _mapper.Map<MealEntity>(dto);
+            _repository.DeleteMeal(mealEntity);
         }
 
         public ICollection<ReadOnlyMealDto> GetAllMeals()
@@ -43,18 +35,11 @@ namespace cafe.Application.Features.Meal
             return _mapper.Map<List<ReadOnlyMealDto>>(result);
         }
 
-        public ReadOnlyMealDto? UpdateMeal(UpdateOnlyMealDto dto)
+        public ReadOnlyMealDto UpdateMeal(UpdateOnlyMealDto dto)
         {
-            try
-            {
-                var mealEntity = _mapper.Map<MealEntity>(dto);
-                var result = _repository.UpdateMeal(mealEntity);
-                return _mapper.Map<ReadOnlyMealDto>(result);
-            }
-            catch
-            {
-                throw new Exception("object not found exception");
-            }
+            var mealEntity = _mapper.Map<MealEntity>(dto);
+            var result = _repository.UpdateMeal(mealEntity);
+            return _mapper.Map<ReadOnlyMealDto>(result);
         }
     }
 }

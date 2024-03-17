@@ -1,5 +1,6 @@
-﻿using cafe.Domain.Meal.DTO;
-using cafe.Domain.Meal.Service;
+﻿
+using cafe.Application.Features.Meal.DTO;
+using cafe.Application.Features.Meal.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,29 +30,14 @@ namespace cafe.Controllers
         [HttpPut("UpdateMeal")]
         public ActionResult<ReadOnlyMealDto> UpdateMeal([FromBody]UpdateOnlyMealDto dto)
         {
-            try
-            {
-                return Ok(_service.UpdateMeal(dto));
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-
+            return Ok(_service.UpdateMeal(dto));
         }
 
         [HttpDelete("DeleteMeal")]
         public ActionResult<ReadOnlyMealDto> DeleteMeal([FromBody]  UpdateOnlyMealDto dto)
         {
-            try
-            {
-                _service.DeleteMeal(dto);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            _service.DeleteMeal(dto);
+            return Ok();
         }
     }
 }

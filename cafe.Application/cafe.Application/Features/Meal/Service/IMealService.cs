@@ -1,12 +1,12 @@
-﻿using cafe.Domain.Meal.DTO;
+﻿using cafe.Application.Features.Meal.DTO;
 
-namespace cafe.Domain.Meal.Service
+namespace cafe.Application.Features.Meal.Service
 {
     public interface IMealService
     {
         ICollection<ReadOnlyMealDto> GetAllMeals();
         ReadOnlyMealDto AddMeal(WriteOnlyMealDto dto);
-        ReadOnlyMealDto? UpdateMeal(UpdateOnlyMealDto dto);
+        ReadOnlyMealDto UpdateMeal(UpdateOnlyMealDto dto);
         void DeleteMeal(UpdateOnlyMealDto dto);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace cafe.Domain.Meal.DTO
+﻿namespace cafe.Application.Features.Meal.DTO
 {
 	public class ReadOnlyMealDto
 	{

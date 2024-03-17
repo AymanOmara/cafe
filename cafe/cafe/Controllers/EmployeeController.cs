@@ -23,6 +23,16 @@ namespace cafe.Controllers
         {
             return Ok(_service.CreateEmployee(dto));
         }
+        [HttpPut("UpdateEmployee")]
+        public ActionResult<ReadEmployeeDTO> UpdateEmployee([FromBody] UpdateEmployeeDTO dto)
+        {
+            return Ok(_service.UpdateEmployee(dto));
+        }
+        [HttpDelete("DeleteEmployee")]
+        public ActionResult DeleteEmployee([FromBody] ReadEmployeeDTO dto) {
+            _service.DeleteEmployee(dto);
+            return Ok();
+        }
     }
 }
 

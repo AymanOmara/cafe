@@ -23,10 +23,23 @@ namespace cafe.Application.Features.Employee.Service
             return _mapper.Map<ReadEmployeeDTO>(result);
         }
 
+        public void DeleteEmployee(ReadEmployeeDTO dto)
+        {
+            var entity = _mapper.Map<EmployeeEntity>(dto);
+            _repository.DeleteEmployee(entity);
+        }
+
         public ICollection<ReadEmployeeDTO> GetAllEmployees()
         {
             var result = _repository.GetAllEmployees();
             return _mapper.Map<List<ReadEmployeeDTO>>(result);
+        }
+
+        public ReadEmployeeDTO UpdateEmployee(UpdateEmployeeDTO dto)
+        {
+            var entity = _mapper.Map<EmployeeEntity>(dto);
+            var result = _repository.UpdateEmployee(entity);
+            return _mapper.Map<ReadEmployeeDTO>(result);
         }
     }
 }

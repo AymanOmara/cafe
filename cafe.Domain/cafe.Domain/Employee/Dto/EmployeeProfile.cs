@@ -12,7 +12,13 @@ namespace cafe.Domain.Employee.Dto
             CreateMap<WriteSalaryItemDTO, SalaryDeductionEntity>();
             CreateMap<WriteSalaryItemDTO, SalaryIncentiveEntity>();
             CreateMap<EmployeeEntity, ReadEmployeeDTO>();
+            CreateMap<ReadEmployeeDTO, EmployeeEntity>();
             CreateMap<CreateEmployeeDTO, EmployeeEntity>();
+            CreateMap<UpdateEmployeeDTO, EmployeeEntity>();
+            CreateMap<EmployeeEntity, UpdateEmployeeDTO>();
+            CreateMap<ReadSalaryItemDto, SalaryIncentiveEntity>();
+            CreateMap<ReadSalaryItemDto, SalaryDeductionEntity>();
+
         }
     }
 }

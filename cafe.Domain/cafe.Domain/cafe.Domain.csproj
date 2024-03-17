@@ -18,7 +18,6 @@
     <None Remove="Users\" />
     <None Remove="Users\entity\" />
     <None Remove="Category\DTO\" />
-    <None Remove="Meal\DTO\" />
     <None Remove="Employee\" />
     <None Remove="Employee\entity\" />
     <None Remove="Employee\Dto\" />
@@ -36,7 +35,6 @@
     <Folder Include="Users\" />
     <Folder Include="Users\entity\" />
     <Folder Include="Category\DTO\" />
-    <Folder Include="Meal\DTO\" />
     <Folder Include="Employee\" />
     <Folder Include="Employee\entity\" />
     <Folder Include="Employee\Dto\" />

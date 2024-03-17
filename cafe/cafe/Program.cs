@@ -1,14 +1,15 @@
 ﻿using cafe.Domain.Users.entity;
 using cafe.infrastructure;
 using cafe.Ioc;
+using cafe.Utils;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 /// ********* Auth **********
- builder.Services.AddIdentityApiEndpoints<CafeUser>()
-    .AddEntityFrameworkStores<CafeDbContext>();
+builder.Services.AddIdentityApiEndpoints<CafeUser>()
+   .AddEntityFrameworkStores<CafeDbContext>();
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -44,6 +45,7 @@ app.MapIdentityApi<CafeUser>();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.ConfigureExceptionHandler();
 app.MapControllers();
 
 app.Run();

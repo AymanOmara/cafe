@@ -25,15 +25,8 @@ namespace cafe.Application.Features.Category.Service
 
         public void DeleteCategory(UpdateCategoryDTO dto)
         {
-            try
-            {
-                var entity = _mapper.Map<CategoryEntity>(dto);
-                _repository.DeleteCategory(entity);
-            }
-            catch
-            {
-                throw new Exception("object not found");
-            }
+            var entity = _mapper.Map<CategoryEntity>(dto);
+            _repository.DeleteCategory(entity);
         }
 
         public ICollection<ReadCategoryDto> GetCategories()
@@ -43,16 +36,9 @@ namespace cafe.Application.Features.Category.Service
 
         public ReadCategoryDto? UpdateCategory(UpdateCategoryDTO dto)
         {
-            try
-            {
-                var entity = _mapper.Map<CategoryEntity>(dto);
-                var result = _repository.UpdateCategory(entity);
-                return _mapper.Map<ReadCategoryDto>(result);
-            }
-            catch (Exception)
-            {
-                throw new Exception("object not found exception");
-            }
+            var entity = _mapper.Map<CategoryEntity>(dto);
+            var result = _repository.UpdateCategory(entity);
+            return _mapper.Map<ReadCategoryDto>(result);
         }
     }
 }
