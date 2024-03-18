@@ -18,6 +18,8 @@
     <None Remove="Features\Category\DTO\" />
     <None Remove="Features\Meal\Service\" />
     <None Remove="Features\Meal\DTO\" />
+    <None Remove="Features\Table\" />
+    <None Remove="Features\Table\Service\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
@@ -31,6 +33,8 @@
     <Folder Include="Features\Category\DTO\" />
     <Folder Include="Features\Meal\Service\" />
     <Folder Include="Features\Meal\DTO\" />
+    <Folder Include="Features\Table\" />
+    <Folder Include="Features\Table\Service\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\cafe.Domain\cafe.Domain\cafe.Domain.csproj" />

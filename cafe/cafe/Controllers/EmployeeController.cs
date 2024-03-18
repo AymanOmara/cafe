@@ -33,6 +33,8 @@ namespace cafe.Controllers
             _service.DeleteEmployee(dto);
             return Ok();
         }
+
+        /// ********* Implement pay salary **********
     }
 }
 

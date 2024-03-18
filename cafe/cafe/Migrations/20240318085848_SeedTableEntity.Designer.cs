@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cafe.infrastructure;
 
@@ -11,9 +12,11 @@ using cafe.infrastructure;
 namespace cafe.Migrations
 {
     [DbContext(typeof(CafeDbContext))]
-    partial class CafeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240318085848_SeedTableEntity")]
+    partial class SeedTableEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,7 +172,7 @@ namespace cafe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Catgeories", (string)null);
+                    b.ToTable("Catgeories");
                 });
 
             modelBuilder.Entity("cafe.Domain.Employee.EmployeeEntity", b =>
@@ -197,7 +200,7 @@ namespace cafe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees", (string)null);
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("cafe.Domain.Employee.SalaryItemEntity", b =>
@@ -225,7 +228,7 @@ namespace cafe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SalaryItemEntity", (string)null);
+                    b.ToTable("SalaryItemEntity");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("SalaryItemEntity");
 
@@ -260,7 +263,7 @@ namespace cafe.Migrations
 
                     b.HasIndex("CategoryEntityId");
 
-                    b.ToTable("Meals", (string)null);
+                    b.ToTable("Meals");
                 });
 
             modelBuilder.Entity("cafe.Domain.Table.Entity.TableEntity", b =>
@@ -283,7 +286,7 @@ namespace cafe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tables", (string)null);
+                    b.ToTable("Tables");
 
                     b.HasData(
                         new
@@ -790,7 +793,7 @@ namespace cafe.Migrations
 
                     b.HasIndex("EmployeeEntityId");
 
-                    b.ToTable("SalaryItemEntity", null, t =>
+                    b.ToTable("SalaryItemEntity", t =>
                         {
                             t.Property("EmployeeEntityId")
                                 .HasColumnName("SalaryDeductionEntity_EmployeeEntityId");

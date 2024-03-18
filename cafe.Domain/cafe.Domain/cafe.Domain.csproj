@@ -22,6 +22,12 @@
     <None Remove="Employee\entity\" />
     <None Remove="Employee\Dto\" />
     <None Remove="Employee\Service\" />
+    <None Remove="Table\" />
+    <None Remove="Table\Entity\" />
+    <None Remove="Table\Repository\" />
+    <None Remove="Table\Service\" />
+    <None Remove="Client\" />
+    <None Remove="Table\DTO\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Category\" />
@@ -40,6 +46,12 @@
     <Folder Include="Employee\Dto\" />
     <Folder Include="Employee\Service\" />
     <Folder Include="Employee\Repository\" />
+    <Folder Include="Table\" />
+    <Folder Include="Table\Entity\" />
+    <Folder Include="Table\Repository\" />
+    <Folder Include="Table\Service\" />
+    <Folder Include="Client\" />
+    <Folder Include="Table\DTO\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />

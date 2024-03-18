@@ -2,15 +2,19 @@
 using cafe.Application.Features.Employee.Service;
 using cafe.Application.Features.Meal;
 using cafe.Application.Features.Meal.Service;
+using cafe.Application.Features.Table.Service;
 using cafe.Domain.Category.Repository;
 using cafe.Domain.Category.Service;
 using cafe.Domain.Employee.Repository;
 using cafe.Domain.Employee.Service;
 using cafe.Domain.Meal.Repository;
+using cafe.Domain.Table.Repository;
+using cafe.Domain.Table.Service;
 using cafe.infrastructure;
 using cafe.infrastructure.Features.Category.Repository;
 using cafe.infrastructure.Features.Employee.Repository;
 using cafe.infrastructure.Features.Meal.Repository;
+using cafe.infrastructure.Features.Table.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +25,6 @@ public class DependancyContainer
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        
         /// ********* Category **********
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -33,6 +36,10 @@ public class DependancyContainer
         /// ********* Employee **********
         services.AddScoped<IEmployeeService, EmployeeService>();
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+        /// ********* Table **********
+        services.AddScoped<ITableService, TableService>();
+        services.AddScoped<ITableRepository, TableRepository>();
 
         services.AddDbContext<CafeDbContext>((options) =>
         {
