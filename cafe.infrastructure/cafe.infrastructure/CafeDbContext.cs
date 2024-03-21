@@ -1,4 +1,5 @@
 ﻿using cafe.Domain.Category;
+using cafe.Domain.Client.Entity;
 using cafe.Domain.Employee;
 using cafe.Domain.Meal;
 using cafe.Domain.Table.Entity;
@@ -21,7 +22,9 @@ namespace cafe.infrastructure
                 .HasDiscriminator<string>("Discriminator")
                 .HasValue<SalaryIncentiveEntity>("SalaryIncentive")
                 .HasValue<SalaryDeductionEntity>("SalaryDeduction");
-            builder.Seed();
+
+            builder.SeedTableEntity();
+
             base.OnModelCreating(builder);
         }
         public DbSet<CategoryEntity> Catgeories { get; set; }
@@ -31,6 +34,8 @@ namespace cafe.infrastructure
         public DbSet<EmployeeEntity> Employees { get; set; }
 
         public DbSet<TableEntity> Tables { get; set; }
+
+        public DbSet<ClientEntity> Clients { get; set; }
 
     }
 }

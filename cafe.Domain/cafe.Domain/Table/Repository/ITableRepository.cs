@@ -4,7 +4,13 @@ namespace cafe.Domain.Table.Repository
 {
 	public interface ITableRepository
 	{
-		ICollection<TableEntity> GetAllTables();
-	}
+		IQueryable<TableEntity> GetAllTables();
+
+		TableEntity CreateTable(TableEntity entity);
+
+		Task<TableEntity?> GetTableByClientId(int clientId);
+
+		public  Task ChangeDeleteStatus(int tableId, bool status);
+    }
 }
 

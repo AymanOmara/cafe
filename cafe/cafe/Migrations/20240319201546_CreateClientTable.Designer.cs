@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cafe.infrastructure;
 
@@ -11,9 +12,11 @@ using cafe.infrastructure;
 namespace cafe.Migrations
 {
     [DbContext(typeof(CafeDbContext))]
-    partial class CafeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240319201546_CreateClientTable")]
+    partial class CreateClientTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -273,9 +276,6 @@ namespace cafe.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -301,9 +301,6 @@ namespace cafe.Migrations
                     b.Property<int?>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<int>("LobbyName")
                         .HasColumnType("int");
 
@@ -321,420 +318,360 @@ namespace cafe.Migrations
                         new
                         {
                             Id = 1,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "1"
                         },
                         new
                         {
                             Id = 2,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "2"
                         },
                         new
                         {
                             Id = 3,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "3"
                         },
                         new
                         {
                             Id = 4,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "4"
                         },
                         new
                         {
                             Id = 5,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "5"
                         },
                         new
                         {
                             Id = 6,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "6"
                         },
                         new
                         {
                             Id = 7,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "7"
                         },
                         new
                         {
                             Id = 8,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "8"
                         },
                         new
                         {
                             Id = 9,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "9"
                         },
                         new
                         {
                             Id = 10,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "10"
                         },
                         new
                         {
                             Id = 11,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "11"
                         },
                         new
                         {
                             Id = 12,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "12"
                         },
                         new
                         {
                             Id = 13,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "13"
                         },
                         new
                         {
                             Id = 14,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "14"
                         },
                         new
                         {
                             Id = 15,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "15"
                         },
                         new
                         {
                             Id = 16,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "16"
                         },
                         new
                         {
                             Id = 17,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "17"
                         },
                         new
                         {
                             Id = 18,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "18"
                         },
                         new
                         {
                             Id = 19,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "19"
                         },
                         new
                         {
                             Id = 20,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "20"
                         },
                         new
                         {
                             Id = 21,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "21"
                         },
                         new
                         {
                             Id = 22,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "22"
                         },
                         new
                         {
                             Id = 23,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "23"
                         },
                         new
                         {
                             Id = 24,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "24"
                         },
                         new
                         {
                             Id = 25,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "25"
                         },
                         new
                         {
                             Id = 26,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "26"
                         },
                         new
                         {
                             Id = 27,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "27"
                         },
                         new
                         {
                             Id = 28,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "28"
                         },
                         new
                         {
                             Id = 29,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "29"
                         },
                         new
                         {
                             Id = 30,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "30"
                         },
                         new
                         {
                             Id = 31,
-                            Deleted = false,
                             LobbyName = 0,
                             Name = "31"
                         },
                         new
                         {
                             Id = 32,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "32"
                         },
                         new
                         {
                             Id = 33,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "33"
                         },
                         new
                         {
                             Id = 34,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "34"
                         },
                         new
                         {
                             Id = 35,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "35"
                         },
                         new
                         {
                             Id = 36,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "36"
                         },
                         new
                         {
                             Id = 37,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "37"
                         },
                         new
                         {
                             Id = 38,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "38"
                         },
                         new
                         {
                             Id = 39,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "39"
                         },
                         new
                         {
                             Id = 40,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "40"
                         },
                         new
                         {
                             Id = 41,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "41"
                         },
                         new
                         {
                             Id = 42,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "42"
                         },
                         new
                         {
                             Id = 43,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "43"
                         },
                         new
                         {
                             Id = 44,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "44"
                         },
                         new
                         {
                             Id = 45,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "45"
                         },
                         new
                         {
                             Id = 46,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "46"
                         },
                         new
                         {
                             Id = 47,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "47"
                         },
                         new
                         {
                             Id = 48,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "48"
                         },
                         new
                         {
                             Id = 49,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "49"
                         },
                         new
                         {
                             Id = 50,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "50"
                         },
                         new
                         {
                             Id = 51,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "51"
                         },
                         new
                         {
                             Id = 52,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "52"
                         },
                         new
                         {
                             Id = 53,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "53"
                         },
                         new
                         {
                             Id = 54,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "54"
                         },
                         new
                         {
                             Id = 55,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "55"
                         },
                         new
                         {
                             Id = 56,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "56"
                         },
                         new
                         {
                             Id = 57,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "57"
                         },
                         new
                         {
                             Id = 58,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "58"
                         },
                         new
                         {
                             Id = 59,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "59"
                         },
                         new
                         {
                             Id = 60,
-                            Deleted = false,
                             LobbyName = 1,
                             Name = "60"
                         });

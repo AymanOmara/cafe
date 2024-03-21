@@ -5,7 +5,7 @@ namespace cafe.infrastructure.Features.Table.Seeder
 {
     public static class TableSeeder
     {
-        public static void Seed(this ModelBuilder modelBuilder)
+        public static void SeedTableEntity(this ModelBuilder modelBuilder)
         {
             for (int i = 1; i <= 31; i++)
             {

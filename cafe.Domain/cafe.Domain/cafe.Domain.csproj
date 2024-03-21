@@ -28,6 +28,10 @@
     <None Remove="Table\Service\" />
     <None Remove="Client\" />
     <None Remove="Table\DTO\" />
+    <None Remove="Client\DTO\" />
+    <None Remove="Client\Entity\" />
+    <None Remove="Client\Repository\" />
+    <None Remove="Client\Service\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Category\" />
@@ -52,6 +56,10 @@
     <Folder Include="Table\Service\" />
     <Folder Include="Client\" />
     <Folder Include="Table\DTO\" />
+    <Folder Include="Client\DTO\" />
+    <Folder Include="Client\Entity\" />
+    <Folder Include="Client\Repository\" />
+    <Folder Include="Client\Service\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />

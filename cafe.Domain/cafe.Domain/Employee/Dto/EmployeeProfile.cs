@@ -7,18 +7,13 @@ namespace cafe.Domain.Employee.Dto
     {
         public EmployeeProfile()
         {
-            CreateMap<SalaryDeductionEntity, ReadSalaryItemDto>();
-            CreateMap<SalaryIncentiveEntity, ReadSalaryItemDto>();
+            CreateMap<SalaryDeductionEntity, ReadSalaryItemDto>().ReverseMap();
+            CreateMap<SalaryIncentiveEntity, ReadSalaryItemDto>().ReverseMap();
             CreateMap<WriteSalaryItemDTO, SalaryDeductionEntity>();
             CreateMap<WriteSalaryItemDTO, SalaryIncentiveEntity>();
-            CreateMap<EmployeeEntity, ReadEmployeeDTO>();
-            CreateMap<ReadEmployeeDTO, EmployeeEntity>();
+            CreateMap<EmployeeEntity, ReadEmployeeDTO>().ReverseMap();
             CreateMap<CreateEmployeeDTO, EmployeeEntity>();
-            CreateMap<UpdateEmployeeDTO, EmployeeEntity>();
-            CreateMap<EmployeeEntity, UpdateEmployeeDTO>();
-            CreateMap<ReadSalaryItemDto, SalaryIncentiveEntity>();
-            CreateMap<ReadSalaryItemDto, SalaryDeductionEntity>();
-
+            CreateMap<UpdateEmployeeDTO, EmployeeEntity>().ReverseMap();
         }
     }
 }

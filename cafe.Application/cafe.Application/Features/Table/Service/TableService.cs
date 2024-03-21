@@ -17,7 +17,7 @@ namespace cafe.Application.Features.Table.Service
 
         public ICollection<ReadTableDTO> GetAllTables()
         {
-            var result = _repository.GetAllTables();
+            var result = _repository.GetAllTables().Where(table => !table.Deleted).ToList();
             return _mapper.Map<List<ReadTableDTO>>(result);
         }
     }

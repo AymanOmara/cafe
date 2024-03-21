@@ -24,7 +24,9 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 /// ********* IOC Container **********
-DependancyContainer.RegisterServices(builder.Services, builder.Configuration);
+builder.Services.RegisterServices(builder.Configuration);
+
+
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -45,7 +47,7 @@ app.MapIdentityApi<CafeUser>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.ConfigureExceptionHandler();
+//app.ConfigureExceptionHandler();
 app.MapControllers();
 
 app.Run();

@@ -1,4 +1,6 @@
-﻿namespace cafe.Domain.Table.Entity
+﻿using cafe.Domain.Client.Entity;
+
+namespace cafe.Domain.Table.Entity
 {
 	public class TableEntity
 	{
@@ -9,6 +11,9 @@
 		public bool Deleted { get; set; }
 
         public LobbyName LobbyName { get; set; }
-	}
-}
 
+		public ClientEntity? Client { get; set; }
+
+        public int? ClientId { get; set; }
+    }
+}

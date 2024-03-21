@@ -22,6 +22,7 @@
     <None Remove="Features\Table\Repository\" />
     <None Remove="Features\Client\" />
     <None Remove="Features\Table\Seeder\" />
+    <None Remove="Features\Client\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
@@ -36,6 +37,7 @@
     <Folder Include="Features\Table\Repository\" />
     <Folder Include="Features\Client\" />
     <Folder Include="Features\Table\Seeder\" />
+    <Folder Include="Features\Client\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
