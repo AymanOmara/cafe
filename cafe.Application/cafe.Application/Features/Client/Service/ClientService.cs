@@ -43,7 +43,7 @@ namespace cafe.Application.Features.Client.Service
         public async Task DeleteClient(UpdateClientDTO dto)
         {
             var assocaitedTable = await _tableRepository.GetTableByClientId(dto.Id);
-            
+
             if (assocaitedTable == null)
             {
                 var clientEntity = _mapper.Map<ClientEntity>(dto);
@@ -59,7 +59,7 @@ namespace cafe.Application.Features.Client.Service
 
         public ICollection<ReadClientDTO> GetAllClients()
         {
-            var result = _clientRepository.GetAllClients().Where(client=> !client.Deleted);
+            var result = _clientRepository.GetAllClients().Where(client => !client.Deleted);
             return _mapper.Map<List<ReadClientDTO>>(result);
         }
 
