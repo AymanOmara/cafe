@@ -25,9 +25,9 @@ namespace cafe.Application.Features.Client.Service
 
         public ReadClientDTO AddClient(WriteClientDTO dto)
         {
-            
+
             var clientEntity = _mapper.Map<ClientEntity>(dto);
-            
+
             var result = _clientRepository.AddClient(clientEntity);
 
             if (dto.IsVIP)
@@ -43,19 +43,23 @@ namespace cafe.Application.Features.Client.Service
         public async Task DeleteClient(UpdateClientDTO dto)
         {
             var assocaitedTable = await _tableRepository.GetTableByClientId(dto.Id);
+            
             if (assocaitedTable == null)
             {
+                var clientEntity = _mapper.Map<ClientEntity>(dto);
 
+                await _clientRepository.DeleteClient(clientEntity);
             }
-            else {
-
+            else
+            {
+                await _tableRepository.ChangeDeleteStatus(assocaitedTable.Id, true);
+                await _clientRepository.MarkClientDeleted(assocaitedTable.Client);
             }
-            throw new NotImplementedException();
         }
 
         public ICollection<ReadClientDTO> GetAllClients()
         {
-            var result = _clientRepository.GetAllClients();
+            var result = _clientRepository.GetAllClients().Where(client=> !client.Deleted);
             return _mapper.Map<List<ReadClientDTO>>(result);
         }
 
@@ -71,8 +75,9 @@ namespace cafe.Application.Features.Client.Service
                 tableEntity.LobbyName = LobbyName.Specail;
                 _tableRepository.CreateTable(tableEntity);
             }
-            else {
-                await _tableRepository.ChangeDeleteStatus(assocaitedTable.Id,!dto.IsVIP);
+            else
+            {
+                await _tableRepository.ChangeDeleteStatus(assocaitedTable.Id, !dto.IsVIP);
             }
 
             return _mapper.Map<ReadClientDTO>(result);

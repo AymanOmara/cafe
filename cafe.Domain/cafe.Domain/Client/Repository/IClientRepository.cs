@@ -11,6 +11,7 @@ namespace cafe.Domain.Client.Repository
         Task<ClientEntity> UpdateClient(ClientEntity client);
 
         Task DeleteClient(ClientEntity client);
+
+        Task MarkClientDeleted(ClientEntity client);
     }
 }
-

@@ -19,9 +19,22 @@ namespace cafe.infrastructure.Features.Client.Repository
             return client;
         }
 
+        public async Task DeleteClient(ClientEntity client)
+        {
+            _context.Clients.Remove(client);
+            await _context.SaveChangesAsync();
+        }
+
         public ICollection<ClientEntity> GetAllClients()
         {
             return _context.Clients.ToList();
+        }
+
+        public async Task MarkClientDeleted(ClientEntity client)
+        {
+            client.Deleted = true;
+            _context.Entry(client).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
 
         public async Task<ClientEntity> UpdateClient(ClientEntity client)

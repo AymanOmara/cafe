@@ -11,6 +11,8 @@
         public string? PhoneNumber { get; set; } = string.Empty;
 
         public bool IsVIP { get; set; }
+
+        public bool Deleted { get; set; }
     }
 }
 
