@@ -15,6 +15,8 @@ namespace cafe.Domain.Employee.Dto
         public ICollection<WriteSalaryItemDTO>? Deductions { get; set; }
 
         public ICollection<WriteSalaryItemDTO>? Incentive { get; set; }
+
+        public ICollection<WriteSalaryAdvance>? Advance { get; set; }
     }
 }
 

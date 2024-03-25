@@ -35,6 +35,13 @@ namespace cafe.Application.Features.Employee.Service
             return _mapper.Map<List<ReadEmployeeDTO>>(result);
         }
 
+        public ReadEmployeeDTO PaySalary(UpdateEmployeeDTO dto)
+        {
+            var entity = _mapper.Map<EmployeeEntity>(dto);
+            var result = _repository.PaySalary(entity);
+            return _mapper.Map<ReadEmployeeDTO>(result);
+        }
+
         public ReadEmployeeDTO UpdateEmployee(UpdateEmployeeDTO dto)
         {
             var entity = _mapper.Map<EmployeeEntity>(dto);

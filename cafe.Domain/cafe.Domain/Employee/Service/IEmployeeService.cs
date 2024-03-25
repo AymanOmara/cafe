@@ -7,6 +7,7 @@ namespace cafe.Domain.Employee.Service
         ICollection<ReadEmployeeDTO> GetAllEmployees();
         ReadEmployeeDTO CreateEmployee(CreateEmployeeDTO dto);
         ReadEmployeeDTO UpdateEmployee(UpdateEmployeeDTO dto);
+        ReadEmployeeDTO PaySalary(UpdateEmployeeDTO dto);
         void DeleteEmployee(ReadEmployeeDTO dto);
     }
 }

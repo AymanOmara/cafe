@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace cafe.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class EmployeeController : Controller
     {
@@ -33,7 +33,12 @@ namespace cafe.Controllers
             _service.DeleteEmployee(dto);
             return Ok();
         }
-
+        [HttpPost("PaySalary")]
+        public ActionResult<ReadEmployeeDTO> PaySalary([FromBody] UpdateEmployeeDTO dto)
+        {
+            return Ok(_service.PaySalary(dto));
+        }
+        
         /// ********* Implement pay salary **********
     }
 }

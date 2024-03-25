@@ -1,6 +1,7 @@
 ﻿using cafe.Domain.Category;
 using cafe.Domain.Client.Entity;
 using cafe.Domain.Employee;
+using cafe.Domain.Employee.entity;
 using cafe.Domain.Meal;
 using cafe.Domain.Table.Entity;
 using cafe.Domain.Users.entity;
@@ -18,11 +19,15 @@ namespace cafe.infrastructure
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            /// ********* Employee **********
+            builder.Entity<EmployeeEntity>().Ignore(emp => emp.FinalSalary);
             builder.Entity<SalaryItemEntity>()
                 .HasDiscriminator<string>("Discriminator")
                 .HasValue<SalaryIncentiveEntity>("SalaryIncentive")
+                .HasValue<PayAdvance>("PayAdvance")
                 .HasValue<SalaryDeductionEntity>("SalaryDeduction");
 
+           /// ********* Table **********
             builder.SeedTableEntity();
 
             base.OnModelCreating(builder);

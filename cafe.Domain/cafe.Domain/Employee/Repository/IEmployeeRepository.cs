@@ -6,7 +6,8 @@
 
 		EmployeeEntity CreateEmployee(EmployeeEntity employeeEntity);
         EmployeeEntity UpdateEmployee(EmployeeEntity employeeEntity);
-		void DeleteEmployee(EmployeeEntity employeeEntity);
+        EmployeeEntity PaySalary(EmployeeEntity employeeEntity);
+        void DeleteEmployee(EmployeeEntity employeeEntity);
     }
 }
 

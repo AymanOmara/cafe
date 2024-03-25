@@ -15,6 +15,9 @@
         public ICollection<ReadSalaryItemDto>? Deductions { get; set; }
 
         public ICollection<ReadSalaryItemDto>? Incentive { get; set; }
+
+        public ICollection<ReadAdvancePaymentDTO>? Advance { get; set; }
+
     }
 }
 
