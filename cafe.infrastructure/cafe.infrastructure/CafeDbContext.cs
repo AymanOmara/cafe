@@ -2,6 +2,7 @@
 using cafe.Domain.Client.Entity;
 using cafe.Domain.Employee;
 using cafe.Domain.Employee.entity;
+using cafe.Domain.Event.Entity;
 using cafe.Domain.Meal;
 using cafe.Domain.Table.Entity;
 using cafe.Domain.Users.entity;
@@ -41,6 +42,8 @@ namespace cafe.infrastructure
         public DbSet<TableEntity> Tables { get; set; }
 
         public DbSet<ClientEntity> Clients { get; set; }
+
+        public DbSet<EventEntity> Events { get; set; }
 
     }
 }

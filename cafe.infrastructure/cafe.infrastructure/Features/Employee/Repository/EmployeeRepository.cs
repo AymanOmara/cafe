@@ -7,6 +7,7 @@ namespace cafe.infrastructure.Features.Employee.Repository
     public class EmployeeRepository : IEmployeeRepository
     {
         private readonly CafeDbContext _context;
+
         public EmployeeRepository(CafeDbContext context)
         {
             _context = context;
@@ -45,6 +46,7 @@ namespace cafe.infrastructure.Features.Employee.Repository
             _context.SaveChanges();
             return employeeEntity;
         }
+
         private void SalaryItemsCleaner(EmployeeEntity employeeEntity) {
 
             foreach (var advance in employeeEntity.Advance)
@@ -65,6 +67,7 @@ namespace cafe.infrastructure.Features.Employee.Repository
             employeeEntity?.Deductions?.Clear();
             employeeEntity?.Incentive?.Clear();
         }
+
         private void SalaryItemUpdate(EmployeeEntity employeeEntity) {
             foreach (var deduction in employeeEntity.Deductions)
             {

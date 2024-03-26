@@ -10,12 +10,14 @@ namespace cafe.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeService _service;
+
         public EmployeeController(IEmployeeService service)
         {
             _service = service;
         }
         [HttpGet("Employees")]
-        public ActionResult<ReadEmployeeDTO> GetAllEmployees() {
+        public ActionResult<ReadEmployeeDTO> GetAllEmployees()
+        {
             return Ok(_service.GetAllEmployees());
         }
         [HttpPost("CreateEmployee")]
@@ -29,7 +31,8 @@ namespace cafe.Controllers
             return Ok(_service.UpdateEmployee(dto));
         }
         [HttpDelete("DeleteEmployee")]
-        public ActionResult DeleteEmployee([FromBody] ReadEmployeeDTO dto) {
+        public ActionResult DeleteEmployee([FromBody] ReadEmployeeDTO dto)
+        {
             _service.DeleteEmployee(dto);
             return Ok();
         }
@@ -38,8 +41,6 @@ namespace cafe.Controllers
         {
             return Ok(_service.PaySalary(dto));
         }
-        
-        /// ********* Implement pay salary **********
     }
 }
 

@@ -32,6 +32,11 @@
     <None Remove="Client\Entity\" />
     <None Remove="Client\Repository\" />
     <None Remove="Client\Service\" />
+    <None Remove="Event\" />
+    <None Remove="Event\DTO\" />
+    <None Remove="Event\Entity\" />
+    <None Remove="Event\Service\" />
+    <None Remove="Event\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Category\" />
@@ -60,6 +65,11 @@
     <Folder Include="Client\Entity\" />
     <Folder Include="Client\Repository\" />
     <Folder Include="Client\Service\" />
+    <Folder Include="Event\" />
+    <Folder Include="Event\DTO\" />
+    <Folder Include="Event\Entity\" />
+    <Folder Include="Event\Service\" />
+    <Folder Include="Event\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
