@@ -26,10 +26,12 @@
   <ItemGroup>
     <None Remove="Controllers\" />
     <None Remove="Utils\" />
+    <None Remove="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Utils\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\cafe.Application\cafe.Application\cafe.Application.csproj">

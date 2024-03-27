@@ -1,9 +1,11 @@
 ﻿using cafe.Domain.Table.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cafe.Controllers
 {
-	[Route("api/[controller]")]
+    //[Authorize]
+    [Route("api/[controller]")]
 	public class TableController:Controller
 	{
 		private readonly ITableService _service;
@@ -12,8 +14,8 @@ namespace cafe.Controllers
 			_service = service;
 		}
 		[HttpGet("Tables")]
-		public ActionResult GetAllTables() {
-			return Ok(_service.GetAllTables());
+		public async Task<ActionResult> GetAllTables() {
+			return Ok(await _service.GetAllTables());
 		}
 	}
 }

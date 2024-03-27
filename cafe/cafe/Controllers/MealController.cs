@@ -1,14 +1,13 @@
-﻿
-using cafe.Application.Features.Meal.DTO;
+﻿using cafe.Application.Features.Meal.DTO;
 using cafe.Application.Features.Meal.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cafe.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
-    public class MealController : Controller
+    public class MealController : ControllerBase
     {
         private readonly IMealService _service;
         public MealController(IMealService service)
@@ -17,26 +16,26 @@ namespace cafe.Controllers
         }
 
         [HttpGet("Meals")]
-        public ActionResult<IQueryable> GetAllMeals()
+        public async Task<ActionResult> GetAllMeals()
         {
-            return Ok(_service.GetAllMeals());
+            return Ok(await _service.GetAllMeals());
         }
 
         [HttpPost("AddMeal")]
-        public ActionResult<ReadOnlyMealDto> AddMeal([FromBody]  WriteOnlyMealDto dto)
+        public async Task<ActionResult<ReadOnlyMealDto>> AddMeal([FromBody] WriteOnlyMealDto dto)
         {
-            return Ok(_service.AddMeal(dto));
+            return Ok(await _service.AddMeal(dto));
         }
         [HttpPut("UpdateMeal")]
-        public ActionResult<ReadOnlyMealDto> UpdateMeal([FromBody]UpdateOnlyMealDto dto)
+        public async Task<ActionResult<ReadOnlyMealDto>> UpdateMeal([FromBody] UpdateOnlyMealDto dto)
         {
-            return Ok(_service.UpdateMeal(dto));
+            return Ok(await _service.UpdateMeal(dto));
         }
 
         [HttpDelete("DeleteMeal")]
-        public ActionResult<ReadOnlyMealDto> DeleteMeal([FromBody]  UpdateOnlyMealDto dto)
+        public async Task<ActionResult<ReadOnlyMealDto>> DeleteMeal([FromBody] UpdateOnlyMealDto dto)
         {
-            _service.DeleteMeal(dto);
+            await _service.DeleteMeal(dto);
             return Ok();
         }
     }

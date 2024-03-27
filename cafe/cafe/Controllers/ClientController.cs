@@ -1,11 +1,13 @@
 ﻿using cafe.Domain.Client.DTO;
 using cafe.Domain.Client.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cafe.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
-    public class ClientController : Controller
+    public class ClientController : ControllerBase
     {
         private readonly IClientService _service;
 
@@ -15,14 +17,15 @@ namespace cafe.Controllers
         }
 
         [HttpGet("GetAllClients")]
-        public ActionResult GetAllClients()
+        public async Task<ActionResult> GetAllClients()
         {
-            return Ok(_service.GetAllClients());
+            return Ok(await _service.GetAllClients());
         }
 
         [HttpPost("CreateClient")]
-        public ActionResult CreateClient([FromBody] WriteClientDTO dto) {
-            return Ok(_service.AddClient(dto));
+        public async Task<ActionResult> CreateClient([FromBody] WriteClientDTO dto)
+        {
+            return Ok(await _service.AddClient(dto));
         }
 
         [HttpPut("UpdateClient")]

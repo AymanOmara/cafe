@@ -5,10 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace cafe.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
-    public class CategoryController : Controller
+    public class CategoryController : ControllerBase
     {
+        //api token name 
         private readonly ICategoryService _service;
 
         public CategoryController(ICategoryService service)
@@ -17,24 +18,24 @@ namespace cafe.Controllers
         }
 
         [HttpGet("Categories")]
-        public ActionResult GetCategories()
+        public async Task<ActionResult> GetCategories()
         {
-            return Ok(_service.GetCategories());
+            return Ok(await _service.GetCategories());
         }
         [HttpPost("Create")]
-        public ActionResult CreateCategory([FromBody] CreateCategoryDTO categoryDto)
+        public async Task<ActionResult> CreateCategory([FromBody] CreateCategoryDTO categoryDto)
         {
-            return Ok(_service.CreateCategory(categoryDto));
+            return Ok(await _service.CreateCategory(categoryDto));
         }
         [HttpPut("Update")]
-        public ActionResult UpdateCategory([FromBody] UpdateCategoryDTO updateCategoryDto)
+        public async Task<ActionResult> UpdateCategory([FromBody] UpdateCategoryDTO updateCategoryDto)
         {
-            return Ok(_service.UpdateCategory(updateCategoryDto));
+            return Ok(await _service.UpdateCategory(updateCategoryDto));
         }
         [HttpDelete("Delete")]
-        public ActionResult DeleteCategory([FromBody] UpdateCategoryDTO updateCategoryDto)
+        public async Task<ActionResult> DeleteCategory([FromBody] UpdateCategoryDTO updateCategoryDto)
         {
-            _service.DeleteCategory(updateCategoryDto);
+            await _service.DeleteCategory(updateCategoryDto);
             return Ok();
         }
     }

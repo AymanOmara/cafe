@@ -16,30 +16,30 @@ namespace cafe.Controllers
             _service = service;
         }
         [HttpGet("Employees")]
-        public ActionResult<ReadEmployeeDTO> GetAllEmployees()
+        public async Task<ActionResult<ReadEmployeeDTO>> GetAllEmployees()
         {
-            return Ok(_service.GetAllEmployees());
+            return Ok(await _service.GetAllEmployees());
         }
         [HttpPost("CreateEmployee")]
-        public ActionResult<ReadEmployeeDTO> CreateEmployee([FromBody] CreateEmployeeDTO dto)
+        public async Task<ActionResult<ReadEmployeeDTO>> CreateEmployee([FromBody] CreateEmployeeDTO dto)
         {
-            return Ok(_service.CreateEmployee(dto));
+            return Ok(await _service.CreateEmployee(dto));
         }
         [HttpPut("UpdateEmployee")]
-        public ActionResult<ReadEmployeeDTO> UpdateEmployee([FromBody] UpdateEmployeeDTO dto)
+        public async Task<ActionResult<ReadEmployeeDTO>> UpdateEmployee([FromBody] UpdateEmployeeDTO dto)
         {
-            return Ok(_service.UpdateEmployee(dto));
+            return Ok(await _service.UpdateEmployee(dto));
         }
         [HttpDelete("DeleteEmployee")]
-        public ActionResult DeleteEmployee([FromBody] ReadEmployeeDTO dto)
+        public async Task<ActionResult> DeleteEmployee([FromBody] ReadEmployeeDTO dto)
         {
-            _service.DeleteEmployee(dto);
+            await _service.DeleteEmployee(dto);
             return Ok();
         }
         [HttpPost("PaySalary")]
-        public ActionResult<ReadEmployeeDTO> PaySalary([FromBody] UpdateEmployeeDTO dto)
+        public async Task<ActionResult<ReadEmployeeDTO>> PaySalary([FromBody] UpdateEmployeeDTO dto)
         {
-            return Ok(_service.PaySalary(dto));
+            return Ok(await _service.PaySalary(dto));
         }
     }
 }
