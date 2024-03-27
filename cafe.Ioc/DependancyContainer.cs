@@ -1,24 +1,32 @@
 ﻿using cafe.Application.Features.Category.Service;
 using cafe.Application.Features.Client.Service;
 using cafe.Application.Features.Employee.Service;
+using cafe.Application.Features.Event;
 using cafe.Application.Features.Meal;
 using cafe.Application.Features.Meal.Service;
 using cafe.Application.Features.Table.Service;
+using cafe.Application.Features.Transaction.Service;
 using cafe.Domain.Category.Repository;
 using cafe.Domain.Category.Service;
 using cafe.Domain.Client.Repository;
 using cafe.Domain.Client.Service;
 using cafe.Domain.Employee.Repository;
 using cafe.Domain.Employee.Service;
+using cafe.Domain.Event.Repository;
+using cafe.Domain.Event.Service;
 using cafe.Domain.Meal.Repository;
 using cafe.Domain.Table.Repository;
 using cafe.Domain.Table.Service;
+using cafe.Domain.Transaction.Repository;
+using cafe.Domain.Transaction.Service;
 using cafe.infrastructure;
 using cafe.infrastructure.Features.Category.Repository;
 using cafe.infrastructure.Features.Client.Repository;
 using cafe.infrastructure.Features.Employee.Repository;
+using cafe.infrastructure.Features.Event;
 using cafe.infrastructure.Features.Meal.Repository;
 using cafe.infrastructure.Features.Table.Repository;
+using cafe.infrastructure.Features.Transaction.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +56,15 @@ public static class DependancyContainer
         /// ********* Client **********
         services.AddScoped<IClientService, ClientService>();
         services.AddScoped<IClientRepository, ClientRepository>();
+
+        /// ********* Event **********
+        services.AddScoped<IEventService, EventService>();
+        services.AddScoped<IEventRepository, EventRepository>();
+
+        /// ********* Transaction **********
+        services.AddScoped<ITransactionRepository, TransactionRepository>();
+        services.AddScoped<ITransactionService, TransactionService>();
+        
 
         services.AddDbContext<CafeDbContext>((options) =>
         {

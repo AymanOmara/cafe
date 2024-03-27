@@ -4,18 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace cafe.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
-	public class TableController:Controller
-	{
-		private readonly ITableService _service;
-		public TableController(ITableService service)
-		{
-			_service = service;
-		}
-		[HttpGet("Tables")]
-		public async Task<ActionResult> GetAllTables() {
-			return Ok(await _service.GetAllTables());
-		}
-	}
+    public class TableController : ControllerBase
+    {
+        private readonly ITableService _service;
+
+        public TableController(ITableService service)
+        {
+            _service = service;
+        }
+        [HttpGet("Tables")]
+        public async Task<ActionResult> GetAllTables()
+        {
+            return Ok(await _service.GetAllTables());
+        }
+    }
 }

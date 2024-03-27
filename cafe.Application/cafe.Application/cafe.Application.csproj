@@ -22,6 +22,9 @@
     <None Remove="Features\Table\Service\" />
     <None Remove="Features\Client\" />
     <None Remove="Features\Client\Service\" />
+    <None Remove="Features\Event\" />
+    <None Remove="Features\Transaction\" />
+    <None Remove="Features\Transaction\Service\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
@@ -39,6 +42,9 @@
     <Folder Include="Features\Table\Service\" />
     <Folder Include="Features\Client\" />
     <Folder Include="Features\Client\Service\" />
+    <Folder Include="Features\Event\" />
+    <Folder Include="Features\Transaction\" />
+    <Folder Include="Features\Transaction\Service\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\cafe.Domain\cafe.Domain\cafe.Domain.csproj" />

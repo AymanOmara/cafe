@@ -1,5 +1,4 @@
 ﻿using cafe.Domain.Employee;
-using cafe.Domain.Employee.entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,8 +13,6 @@ namespace cafe.infrastructure.Features.Employee.EntityConfiguration
         public void Configure(EntityTypeBuilder<EmployeeEntity> builder)
         {
             builder.Ignore(emp => emp.FinalSalary);
-
-          
         }
     }
 }

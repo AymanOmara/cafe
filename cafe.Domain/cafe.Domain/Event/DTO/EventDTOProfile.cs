@@ -8,7 +8,8 @@ namespace cafe.Domain.Event.DTO
         public EventDTOProfile()
         {
             CreateMap<ReadEventDTO, EventEntity>().ReverseMap();
+
+            CreateMap<CreateEventDTO, EventEntity>();
         }
     }
 }
-

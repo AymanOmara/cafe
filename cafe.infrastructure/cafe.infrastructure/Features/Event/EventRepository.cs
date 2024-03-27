@@ -1,28 +1,42 @@
 ﻿using cafe.Domain.Event.Entity;
 using cafe.Domain.Event.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace cafe.infrastructure.Features.Event
 {
     public class EventRepository : IEventRepository
     {
-        public Task<EventEntity> Create(EventEntity entity)
+        private readonly CafeDbContext _context;
+
+        public EventRepository(CafeDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task Delete(EventEntity entity)
+        public async Task<EventEntity> Create(EventEntity entity)
         {
-            throw new NotImplementedException();
+            await _context.AddAsync(entity);
+            await _context.SaveChangesAsync();
+            return entity;
         }
 
-        public Task<ICollection<EventEntity>> GetAllRecords()
+        public async Task Delete(EventEntity entity)
         {
-            throw new NotImplementedException();
+            entity.Deleted = true;
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
 
-        public Task<EventEntity> Update(EventEntity entity)
+        public async Task<ICollection<EventEntity>> GetAllRecords()
         {
-            throw new NotImplementedException();
+            return await _context.Events.ToListAsync();
+        }
+
+        public async Task<EventEntity> Update(EventEntity entity)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return entity;
         }
     }
 }

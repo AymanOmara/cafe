@@ -4,9 +4,12 @@ using cafe.Domain.Employee;
 using cafe.Domain.Event.Entity;
 using cafe.Domain.Meal;
 using cafe.Domain.Table.Entity;
+using cafe.Domain.Transaction.Entity;
 using cafe.Domain.Users.entity;
 using cafe.infrastructure.Features.Employee.EntityConfiguration;
+using cafe.infrastructure.Features.Event.EntityConfiguration;
 using cafe.infrastructure.Features.Table.EntityConfiguration;
+using cafe.infrastructure.Features.Transaction.EntityConfiguration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,10 +25,17 @@ namespace cafe.infrastructure
         {
             /// ********* Employee **********
             new EmployeeConiguration().Configure(builder.Entity<EmployeeEntity>());
+
             new SalaryItemConfiguration().Configure(builder.Entity<SalaryItemEntity>());
 
             /// ********* Table **********
             new TableEntityConfiguration().Configure(builder.Entity<TableEntity>());
+
+            /// ********* Event **********
+            new EventEntityConfiguration().Configure(builder.Entity<EventEntity>());
+
+            /// ********* Transaction **********
+            new TransactionEntityConfiguration().Configure(builder.Entity<TransactionEntity>());
 
             base.OnModelCreating(builder);
         }
@@ -41,6 +51,7 @@ namespace cafe.infrastructure
 
         public DbSet<EventEntity> Events { get; set; }
 
+        public DbSet<TransactionEntity> TransactionsEntity { get; set; }
     }
 }
 

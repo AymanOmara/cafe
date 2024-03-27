@@ -25,6 +25,11 @@
     <None Remove="Features\Employee\EntityConfiguration\" />
     <None Remove="Features\Table\EntityConfiguration\" />
     <None Remove="Features\Event\" />
+    <None Remove="Features\Event\Repository\" />
+    <None Remove="Features\Event\EntityConfiguration\" />
+    <None Remove="Features\Transaction\" />
+    <None Remove="Features\Transaction\Repository\" />
+    <None Remove="Features\Transaction\EntityConfiguration\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
@@ -42,6 +47,11 @@
     <Folder Include="Features\Employee\EntityConfiguration\" />
     <Folder Include="Features\Table\EntityConfiguration\" />
     <Folder Include="Features\Event\" />
+    <Folder Include="Features\Event\Repository\" />
+    <Folder Include="Features\Event\EntityConfiguration\" />
+    <Folder Include="Features\Transaction\" />
+    <Folder Include="Features\Transaction\Repository\" />
+    <Folder Include="Features\Transaction\EntityConfiguration\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />

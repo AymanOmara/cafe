@@ -2,7 +2,6 @@
 {
 	public class EventEntity
 	{
-
 		public int Id { get; set; }
 
 		public decimal Price { get; set; }
@@ -21,6 +20,12 @@
 
 		public string CancelationReason { get; set; } = string.Empty;
 
+        public decimal RemainingAmount
+        {
+            get { return Price - Deposit; }
+        }
         public bool CheckOut { get; set; }
+
+        public bool Deleted { get; set; }
     }
 }

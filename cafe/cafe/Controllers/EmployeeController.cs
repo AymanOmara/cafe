@@ -7,7 +7,7 @@ namespace cafe.Controllers
 {
     //[Authorize]
     [Route("api/[controller]")]
-    public class EmployeeController : Controller
+    public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _service;
 

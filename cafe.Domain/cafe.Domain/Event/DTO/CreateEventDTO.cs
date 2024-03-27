@@ -1,24 +1,26 @@
-﻿namespace cafe.Domain.Event.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace cafe.Domain.Event.DTO
 {
-	public class ReadEventDTO
+	public class CreateEventDTO
 	{
-
-        public int Id { get; set; }
-
+        [Required]
         public decimal Price { get; set; }
 
+        [Required]
         public decimal Deposit { get; set; }
 
-        public decimal RemainingAmount { get; set; }
-
-        public DateTime CreatedDate { get; set; }
-
+        [Required]
         public DateTime RservationDate { get; set; }
 
+        [Required]
         public string ClientName { get; set; } = string.Empty;
 
+        [Required]
         public string Prerequisites { get; set; } = string.Empty;
 
+        [Required]
         public string ClientPhoneNumber { get; set; } = string.Empty;
     }
 }
+
