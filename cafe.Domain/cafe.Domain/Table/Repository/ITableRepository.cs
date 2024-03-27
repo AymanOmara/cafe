@@ -2,15 +2,15 @@
 
 namespace cafe.Domain.Table.Repository
 {
-	public interface ITableRepository
-	{
-		IQueryable<TableEntity> GetAllTables();
+    public interface ITableRepository
+    {
+        Task<ICollection<TableEntity>> GetAllTables();
 
-		TableEntity CreateTable(TableEntity entity);
+        Task<TableEntity> CreateTable(TableEntity entity);
 
-		Task<TableEntity?> GetTableByClientId(int clientId);
+        Task<TableEntity?> GetTableByClientId(int clientId);
 
-		public  Task ChangeDeleteStatus(int tableId, bool status);
+        Task ChangeDeleteStatus(int tableId, bool status);
     }
 }
 

@@ -4,10 +4,9 @@ namespace cafe.Application.Features.Meal.Service
 {
     public interface IMealService
     {
-        ICollection<ReadOnlyMealDto> GetAllMeals();
-        ReadOnlyMealDto AddMeal(WriteOnlyMealDto dto);
-        ReadOnlyMealDto UpdateMeal(UpdateOnlyMealDto dto);
-        void DeleteMeal(UpdateOnlyMealDto dto);
+        Task<ICollection<ReadOnlyMealDto>> GetAllMeals();
+        Task<ReadOnlyMealDto> AddMeal(WriteOnlyMealDto dto);
+        Task<ReadOnlyMealDto> UpdateMeal(UpdateOnlyMealDto dto);
+        Task DeleteMeal(UpdateOnlyMealDto dto);
     }
 }
-

@@ -4,9 +4,9 @@ namespace cafe.Domain.Client.Service
 {
 	public interface IClientService
 	{
-		ICollection<ReadClientDTO> GetAllClients();
+		Task<ICollection<ReadClientDTO>> GetAllClients();
 
-		ReadClientDTO AddClient(WriteClientDTO dto);
+		Task<ReadClientDTO> AddClient(WriteClientDTO dto);
 
         Task<ReadClientDTO> UpdateClient(UpdateClientDTO dto);
 

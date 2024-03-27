@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Employee;
+﻿using cafe.Domain.Common;
+using cafe.Domain.Employee;
 using cafe.Domain.Employee.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,41 +14,43 @@ namespace cafe.infrastructure.Features.Employee.Repository
             _context = context;
         }
 
-        public EmployeeEntity CreateEmployee(EmployeeEntity employeeEntity)
+        public async Task<EmployeeEntity> Create(EmployeeEntity employeeEntity)
         {
             _context.Employees.Add(employeeEntity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return employeeEntity;
         }
 
-        public void DeleteEmployee(EmployeeEntity employeeEntity)
+        public async Task Delete(EmployeeEntity employeeEntity)
         {
             SalaryItemsCleaner(employeeEntity);
             _context.Employees.Remove(employeeEntity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public ICollection<EmployeeEntity> GetAllEmployees()
+        public async Task<ICollection<EmployeeEntity>> GetAllRecords()
         {
-            return _context.Employees.Include(emp => emp.Deductions).Include(emp => emp.Incentive).Include(emp => emp.Advance).ToList();
+            return await _context.Employees.Include(emp => emp.Deductions).Include(emp => emp.Incentive).Include(emp => emp.Advance).ToListAsync();
         }
 
-        public EmployeeEntity PaySalary(EmployeeEntity employeeEntity)
+        public async Task<EmployeeEntity> PaySalary(EmployeeEntity employeeEntity)
         {
             SalaryItemsCleaner(employeeEntity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return employeeEntity;
         }
 
-        public EmployeeEntity UpdateEmployee(EmployeeEntity employeeEntity)
+        public async Task<EmployeeEntity> Update(EmployeeEntity employeeEntity)
         {
             SalaryItemUpdate(employeeEntity);
             _context.Entry(employeeEntity).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return employeeEntity;
         }
 
-        private void SalaryItemsCleaner(EmployeeEntity employeeEntity) {
+
+        private void SalaryItemsCleaner(EmployeeEntity employeeEntity)
+        {
 
             foreach (var advance in employeeEntity.Advance)
             {
@@ -68,7 +71,8 @@ namespace cafe.infrastructure.Features.Employee.Repository
             employeeEntity?.Incentive?.Clear();
         }
 
-        private void SalaryItemUpdate(EmployeeEntity employeeEntity) {
+        private void SalaryItemUpdate(EmployeeEntity employeeEntity)
+        {
             foreach (var deduction in employeeEntity.Deductions)
             {
                 if (deduction.Id == 0)

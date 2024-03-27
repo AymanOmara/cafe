@@ -12,31 +12,30 @@ namespace cafe.infrastructure.Features.Meal.Repository
             _context = context;
         }
 
-        public MealEntity AddMeal(MealEntity meal)
+        public async Task<MealEntity> Create(MealEntity meal)
         {
             _context.Meals.Add(meal);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return meal;
         }
 
-        public void DeleteMeal(MealEntity meal)
+        public async Task Delete(MealEntity meal)
         {
             meal.Deleted = true;
             _context.Entry(meal).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public ICollection<MealEntity> GetAllMeals()
+        public async Task<ICollection<MealEntity>> GetAllRecords()
         {
-            return _context.Meals.ToList();
+            return await _context.Meals.ToListAsync();
         }
 
-        public MealEntity UpdateMeal(MealEntity meal)
+        public async Task<MealEntity> Update(MealEntity meal)
         {
             _context.Entry(meal).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return meal;
         }
     }
 }
-

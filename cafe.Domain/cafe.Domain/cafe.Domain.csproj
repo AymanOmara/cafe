@@ -37,6 +37,7 @@
     <None Remove="Event\Entity\" />
     <None Remove="Event\Service\" />
     <None Remove="Event\Repository\" />
+    <None Remove="Common\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Category\" />
@@ -70,6 +71,7 @@
     <Folder Include="Event\Entity\" />
     <Folder Include="Event\Service\" />
     <Folder Include="Event\Repository\" />
+    <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />

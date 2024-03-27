@@ -21,8 +21,10 @@
     <None Remove="Features\Table\" />
     <None Remove="Features\Table\Repository\" />
     <None Remove="Features\Client\" />
-    <None Remove="Features\Table\Seeder\" />
     <None Remove="Features\Client\Repository\" />
+    <None Remove="Features\Employee\EntityConfiguration\" />
+    <None Remove="Features\Table\EntityConfiguration\" />
+    <None Remove="Features\Event\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
@@ -36,8 +38,10 @@
     <Folder Include="Features\Table\" />
     <Folder Include="Features\Table\Repository\" />
     <Folder Include="Features\Client\" />
-    <Folder Include="Features\Table\Seeder\" />
     <Folder Include="Features\Client\Repository\" />
+    <Folder Include="Features\Employee\EntityConfiguration\" />
+    <Folder Include="Features\Table\EntityConfiguration\" />
+    <Folder Include="Features\Event\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />

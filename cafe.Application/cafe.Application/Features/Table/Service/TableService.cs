@@ -15,10 +15,10 @@ namespace cafe.Application.Features.Table.Service
             _repository = repository;
 		}
 
-        public ICollection<ReadTableDTO> GetAllTables()
+        public async Task<ICollection<ReadTableDTO>> GetAllTables()
         {
-            var result = _repository.GetAllTables().Where(table => !table.Deleted).ToList();
-            return _mapper.Map<List<ReadTableDTO>>(result);
+            var result = await _repository.GetAllTables();
+            return _mapper.Map<List<ReadTableDTO>>(result.Where(table => !table.Deleted).ToList());
         }
     }
 }

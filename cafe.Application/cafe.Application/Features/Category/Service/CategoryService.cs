@@ -16,28 +16,29 @@ namespace cafe.Application.Features.Category.Service
             _mapper = mapper;
         }
 
-        public ReadCategoryDto CreateCategory(CreateCategoryDTO dto)
+        public async Task<ReadCategoryDto> CreateCategory(CreateCategoryDTO dto)
         {
             var entity = _mapper.Map<CategoryEntity>(dto);
-            var result = _repository.CreateCategory(entity);
+            var result = await _repository.Create(entity);
             return _mapper.Map<ReadCategoryDto>(result);
         }
 
-        public void DeleteCategory(UpdateCategoryDTO dto)
+        public async Task DeleteCategory(UpdateCategoryDTO dto)
         {
             var entity = _mapper.Map<CategoryEntity>(dto);
-            _repository.DeleteCategory(entity);
+            await _repository.Delete(entity);
         }
 
-        public ICollection<ReadCategoryDto> GetCategories()
+        public async Task<ICollection<ReadCategoryDto>> GetCategories()
         {
-            return _mapper.Map<List<ReadCategoryDto>>(_repository.GetCategories());
+            var result = await _repository.GetAllRecords();
+            return  _mapper.Map<List<ReadCategoryDto>>(result);
         }
 
-        public ReadCategoryDto? UpdateCategory(UpdateCategoryDTO dto)
+        public async Task<ReadCategoryDto?> UpdateCategory(UpdateCategoryDTO dto)
         {
             var entity = _mapper.Map<CategoryEntity>(dto);
-            var result = _repository.UpdateCategory(entity);
+            var result = await _repository.Update(entity);
             return _mapper.Map<ReadCategoryDto>(result);
         }
     }

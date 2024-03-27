@@ -12,16 +12,17 @@ namespace cafe.infrastructure.Features.Table.Repository
             _context = context;
         }
 
-        public TableEntity CreateTable(TableEntity entity)
+        public async Task<TableEntity> CreateTable(TableEntity entity)
         {
             _context.Tables.Add(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return entity;
         }
 
         public async Task ChangeDeleteStatus(int tableId,bool status)
         {
-            var table = GetAllTables().FirstOrDefault(table => table.Id == tableId);
+            var allTables = await GetAllTables();
+            var table = allTables.FirstOrDefault(table => table.Id == tableId);
             if (table != null) {
                 table.Deleted = status;
                 _context.Entry(table).State = EntityState.Modified;
@@ -29,14 +30,15 @@ namespace cafe.infrastructure.Features.Table.Repository
             }
         }
 
-        public IQueryable<TableEntity> GetAllTables()
+        public async  Task<ICollection<TableEntity>> GetAllTables()
         {
-            return _context.Tables.Include(table => table.Client);
+            return await _context.Tables.Include(table => table.Client).ToListAsync();
         }
 
         public async Task<TableEntity?> GetTableByClientId(int clientId)
         {
-            var result = await GetAllTables().FirstOrDefaultAsync(table => table.ClientId == clientId);
+            var tables = await GetAllTables();
+            var result =  tables.FirstOrDefault(table => table.ClientId == clientId);
             return result;
         }
     }

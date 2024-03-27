@@ -4,9 +4,9 @@ namespace cafe.Domain.Category.Service
 {
     public interface ICategoryService
     {
-        ICollection<ReadCategoryDto> GetCategories();
-        ReadCategoryDto CreateCategory(CreateCategoryDTO dto);
-        ReadCategoryDto? UpdateCategory(UpdateCategoryDTO dto);
-        void DeleteCategory(UpdateCategoryDTO dto);
+        Task<ICollection<ReadCategoryDto>> GetCategories();
+        Task<ReadCategoryDto> CreateCategory(CreateCategoryDTO dto);
+        Task<ReadCategoryDto?> UpdateCategory(UpdateCategoryDTO dto);
+        Task DeleteCategory(UpdateCategoryDTO dto);
     }
 }

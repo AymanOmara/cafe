@@ -4,15 +4,15 @@ namespace cafe.Domain.Employee.Service
 {
     public interface IEmployeeService
     {
-        ICollection<ReadEmployeeDTO> GetAllEmployees();
+        Task<ICollection<ReadEmployeeDTO>> GetAllEmployees();
 
-        ReadEmployeeDTO CreateEmployee(CreateEmployeeDTO dto);
+        Task<ReadEmployeeDTO> CreateEmployee(CreateEmployeeDTO dto);
 
-        ReadEmployeeDTO UpdateEmployee(UpdateEmployeeDTO dto);
+        Task<ReadEmployeeDTO> UpdateEmployee(UpdateEmployeeDTO dto);
 
-        ReadEmployeeDTO PaySalary(UpdateEmployeeDTO dto);
+        Task<ReadEmployeeDTO> PaySalary(UpdateEmployeeDTO dto);
 
-        void DeleteEmployee(ReadEmployeeDTO dto);
+        Task DeleteEmployee(ReadEmployeeDTO dto);
     }
 }
 

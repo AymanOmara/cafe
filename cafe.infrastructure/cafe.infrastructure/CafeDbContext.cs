@@ -1,12 +1,12 @@
 ﻿using cafe.Domain.Category;
 using cafe.Domain.Client.Entity;
 using cafe.Domain.Employee;
-using cafe.Domain.Employee.entity;
 using cafe.Domain.Event.Entity;
 using cafe.Domain.Meal;
 using cafe.Domain.Table.Entity;
 using cafe.Domain.Users.entity;
-using cafe.infrastructure.Features.Table.Seeder;
+using cafe.infrastructure.Features.Employee.EntityConfiguration;
+using cafe.infrastructure.Features.Table.EntityConfiguration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,15 +21,11 @@ namespace cafe.infrastructure
         protected override void OnModelCreating(ModelBuilder builder)
         {
             /// ********* Employee **********
-            builder.Entity<EmployeeEntity>().Ignore(emp => emp.FinalSalary);
-            builder.Entity<SalaryItemEntity>()
-                .HasDiscriminator<string>("Discriminator")
-                .HasValue<SalaryIncentiveEntity>("SalaryIncentive")
-                .HasValue<PayAdvance>("PayAdvance")
-                .HasValue<SalaryDeductionEntity>("SalaryDeduction");
+            new EmployeeConiguration().Configure(builder.Entity<EmployeeEntity>());
+            new SalaryItemConfiguration().Configure(builder.Entity<SalaryItemEntity>());
 
-           /// ********* Table **********
-            builder.SeedTableEntity();
+            /// ********* Table **********
+            new TableEntityConfiguration().Configure(builder.Entity<TableEntity>());
 
             base.OnModelCreating(builder);
         }

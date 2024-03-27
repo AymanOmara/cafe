@@ -13,28 +13,28 @@ namespace cafe.infrastructure.Features.Category.Repository
             _context = context;
         }
 
-        public CategoryEntity CreateCategory(CategoryEntity category)
+        public async Task<CategoryEntity> Create(CategoryEntity category)
         {
             _context.Catgeories.Add(category);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return category;
         }
 
-        public void DeleteCategory(CategoryEntity category)
+        public async Task Delete(CategoryEntity category)
         {
             _context.Catgeories.Remove(category);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public ICollection<CategoryEntity> GetCategories()
+        public async Task<ICollection<CategoryEntity>> GetAllRecords()
         {
-            return _context.Catgeories.ToList();
+            return await _context.Catgeories.ToListAsync();
         }
 
-        public CategoryEntity UpdateCategory(CategoryEntity category)
+        public async Task<CategoryEntity> Update(CategoryEntity category)
         {
             _context.Entry(category).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return category;
         }
     }

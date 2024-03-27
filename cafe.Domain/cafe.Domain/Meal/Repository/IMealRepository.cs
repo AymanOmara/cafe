@@ -1,11 +1,10 @@
-﻿namespace cafe.Domain.Meal.Repository
+﻿using cafe.Domain.Common;
+
+namespace cafe.Domain.Meal.Repository
 {
-    public interface IMealRepository
+    public interface IMealRepository: IUnitOfWorkRepository<MealEntity>
     {
-        ICollection<MealEntity> GetAllMeals();
-        MealEntity AddMeal(MealEntity meal);
-        MealEntity UpdateMeal(MealEntity meal);
-        void DeleteMeal(MealEntity meal);
+         
     }
 }
 

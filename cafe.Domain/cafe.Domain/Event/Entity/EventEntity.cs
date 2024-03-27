@@ -9,9 +9,11 @@
 
         public decimal Deposit { get; set; }
 
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
 
-		public string ClientName { get; set; } = string.Empty;
+        public DateTime RservationDate { get; set; }
+
+        public string ClientName { get; set; } = string.Empty;
 
 		public string Prerequisites { get; set; } = string.Empty;
 

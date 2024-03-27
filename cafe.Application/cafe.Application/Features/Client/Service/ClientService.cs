@@ -23,12 +23,12 @@ namespace cafe.Application.Features.Client.Service
             _tableRepository = tableRepository;
         }
 
-        public ReadClientDTO AddClient(WriteClientDTO dto)
+        public async Task<ReadClientDTO> AddClient(WriteClientDTO dto)
         {
 
             var clientEntity = _mapper.Map<ClientEntity>(dto);
 
-            var result = _clientRepository.AddClient(clientEntity);
+            var result = await _clientRepository.Create(clientEntity);
 
             if (dto.IsVIP)
             {
@@ -48,7 +48,7 @@ namespace cafe.Application.Features.Client.Service
             {
                 var clientEntity = _mapper.Map<ClientEntity>(dto);
 
-                await _clientRepository.DeleteClient(clientEntity);
+                await _clientRepository.Delete(clientEntity);
             }
             else
             {
@@ -57,16 +57,16 @@ namespace cafe.Application.Features.Client.Service
             }
         }
 
-        public ICollection<ReadClientDTO> GetAllClients()
+        public async Task<ICollection<ReadClientDTO>> GetAllClients()
         {
-            var result = _clientRepository.GetAllClients().Where(client => !client.Deleted);
-            return _mapper.Map<List<ReadClientDTO>>(result);
+            var result = await _clientRepository.GetAllRecords();
+            return _mapper.Map<List<ReadClientDTO>>(result.Where(client => !client.Deleted));
         }
 
         public async Task<ReadClientDTO> UpdateClient(UpdateClientDTO dto)
         {
             var clientEntity = _mapper.Map<ClientEntity>(dto);
-            var result = await _clientRepository.UpdateClient(clientEntity);
+            var result = await _clientRepository.Update(clientEntity);
             var assocaitedTable = await _tableRepository.GetTableByClientId(dto.Id);
 
             if (dto.IsVIP && assocaitedTable == null)

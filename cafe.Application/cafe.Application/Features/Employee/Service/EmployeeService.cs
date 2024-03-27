@@ -16,36 +16,36 @@ namespace cafe.Application.Features.Employee.Service
             _repository = repository;
 		}
 
-        public ReadEmployeeDTO CreateEmployee(CreateEmployeeDTO dto)
+        public async Task<ReadEmployeeDTO> CreateEmployee(CreateEmployeeDTO dto)
         {
             var entity = _mapper.Map<EmployeeEntity>(dto);
-            var result = _repository.CreateEmployee(entity);
+            var result = await _repository.Create(entity);
             return _mapper.Map<ReadEmployeeDTO>(result);
         }
 
-        public void DeleteEmployee(ReadEmployeeDTO dto)
+        public async Task DeleteEmployee(ReadEmployeeDTO dto)
         {
             var entity = _mapper.Map<EmployeeEntity>(dto);
-            _repository.DeleteEmployee(entity);
+            await _repository.Delete(entity);
         }
 
-        public ICollection<ReadEmployeeDTO> GetAllEmployees()
+        public async Task<ICollection<ReadEmployeeDTO>> GetAllEmployees()
         {
-            var result = _repository.GetAllEmployees();
+            var result = await _repository.GetAllRecords();
             return _mapper.Map<List<ReadEmployeeDTO>>(result);
         }
 
-        public ReadEmployeeDTO PaySalary(UpdateEmployeeDTO dto)
+        public async Task<ReadEmployeeDTO> PaySalary(UpdateEmployeeDTO dto)
         {
             var entity = _mapper.Map<EmployeeEntity>(dto);
-            var result = _repository.PaySalary(entity);
+            var result = await _repository.PaySalary(entity);
             return _mapper.Map<ReadEmployeeDTO>(result);
         }
 
-        public ReadEmployeeDTO UpdateEmployee(UpdateEmployeeDTO dto)
+        public async Task<ReadEmployeeDTO> UpdateEmployee(UpdateEmployeeDTO dto)
         {
             var entity = _mapper.Map<EmployeeEntity>(dto);
-            var result = _repository.UpdateEmployee(entity);
+            var result = await _repository.Update(entity);
             return _mapper.Map<ReadEmployeeDTO>(result);
         }
     }

@@ -12,22 +12,24 @@ namespace cafe.infrastructure.Features.Client.Repository
             _context = context;
         }
 
-        public ClientEntity AddClient(ClientEntity client)
+        public async Task<ClientEntity> Create(ClientEntity client)
         {
             _context.Clients.Add(client);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return client;
         }
 
-        public async Task DeleteClient(ClientEntity client)
+
+        public async Task Delete(ClientEntity client)
         {
             _context.Clients.Remove(client);
             await _context.SaveChangesAsync();
         }
 
-        public ICollection<ClientEntity> GetAllClients()
+
+        public async Task<ICollection<ClientEntity>> GetAllRecords()
         {
-            return _context.Clients.ToList();
+            return await _context.Clients.ToListAsync();
         }
 
         public async Task MarkClientDeleted(ClientEntity client)
@@ -37,12 +39,14 @@ namespace cafe.infrastructure.Features.Client.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ClientEntity> UpdateClient(ClientEntity client)
+        public async Task<ClientEntity> Update(ClientEntity client)
         {
             _context.Entry(client).State = EntityState.Modified;
             await _context.SaveChangesAsync();
             return client;
         }
+
+
     }
 }
 

@@ -16,29 +16,29 @@ namespace cafe.Application.Features.Meal
             _mapper = mapper;
         }
 
-        public ReadOnlyMealDto AddMeal(WriteOnlyMealDto dto)
+        public async Task<ReadOnlyMealDto> AddMeal(WriteOnlyMealDto dto)
         {
             var mealEntity = _mapper.Map<MealEntity>(dto);
-            var result = _repository.AddMeal(mealEntity);
+            var result = await _repository.Create(mealEntity);
             return _mapper.Map<ReadOnlyMealDto>(result);
         }
 
-        public void DeleteMeal(UpdateOnlyMealDto dto)
+        public async Task DeleteMeal(UpdateOnlyMealDto dto)
         {
             var mealEntity = _mapper.Map<MealEntity>(dto);
-            _repository.DeleteMeal(mealEntity);
+            await _repository.Delete(mealEntity);
         }
 
-        public ICollection<ReadOnlyMealDto> GetAllMeals()
+        public async Task<ICollection<ReadOnlyMealDto>> GetAllMeals()
         {
-            var result = _repository.GetAllMeals();
+            var result = await _repository.GetAllRecords();
             return _mapper.Map<List<ReadOnlyMealDto>>(result);
         }
 
-        public ReadOnlyMealDto UpdateMeal(UpdateOnlyMealDto dto)
+        public async Task<ReadOnlyMealDto> UpdateMeal(UpdateOnlyMealDto dto)
         {
             var mealEntity = _mapper.Map<MealEntity>(dto);
-            var result = _repository.UpdateMeal(mealEntity);
+            var result = await _repository.Update(mealEntity);
             return _mapper.Map<ReadOnlyMealDto>(result);
         }
     }

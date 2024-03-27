@@ -1,11 +1,10 @@
-﻿namespace cafe.Domain.Category.Repository
+﻿using cafe.Domain.Common;
+
+namespace cafe.Domain.Category.Repository
 {
-	public interface ICategoryRepository
+	public interface ICategoryRepository:IUnitOfWorkRepository<CategoryEntity>
 	{
-		ICollection<CategoryEntity> GetCategories();
-		CategoryEntity CreateCategory(CategoryEntity category);
-        CategoryEntity UpdateCategory(CategoryEntity category);
-		void DeleteCategory(CategoryEntity category);
+
     }
 }
 

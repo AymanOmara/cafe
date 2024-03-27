@@ -4,7 +4,7 @@ namespace cafe.Domain.Table.Service
 {
 	public interface ITableService
     {
-		ICollection<ReadTableDTO> GetAllTables();
+		Task<ICollection<ReadTableDTO>> GetAllTables();
 	}
 }
 
