@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using cafe.Domain.Common;
+using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
-using cafe.Application.Utils;
 
 namespace cafe.Utils
 {

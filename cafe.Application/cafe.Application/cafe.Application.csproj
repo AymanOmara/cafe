@@ -13,7 +13,6 @@
     <None Remove="Features\Meal\" />
     <None Remove="Features\Employee\" />
     <None Remove="Features\Employee\Service\" />
-    <None Remove="Utils\" />
     <None Remove="Features\Employee\DTO\" />
     <None Remove="Features\Category\DTO\" />
     <None Remove="Features\Meal\Service\" />
@@ -25,6 +24,9 @@
     <None Remove="Features\Event\" />
     <None Remove="Features\Transaction\" />
     <None Remove="Features\Transaction\Service\" />
+    <None Remove="Common\" />
+    <None Remove="Features\User\" />
+    <None Remove="Features\User\Service\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
@@ -33,7 +35,6 @@
     <Folder Include="Features\Meal\" />
     <Folder Include="Features\Employee\" />
     <Folder Include="Features\Employee\Service\" />
-    <Folder Include="Utils\" />
     <Folder Include="Features\Employee\DTO\" />
     <Folder Include="Features\Category\DTO\" />
     <Folder Include="Features\Meal\Service\" />
@@ -45,6 +46,9 @@
     <Folder Include="Features\Event\" />
     <Folder Include="Features\Transaction\" />
     <Folder Include="Features\Transaction\Service\" />
+    <Folder Include="Common\" />
+    <Folder Include="Features\User\" />
+    <Folder Include="Features\User\Service\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\cafe.Domain\cafe.Domain\cafe.Domain.csproj" />

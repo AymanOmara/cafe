@@ -8,8 +8,10 @@ using cafe.Domain.Transaction.Entity;
 using cafe.Domain.Users.entity;
 using cafe.infrastructure.Features.Employee.EntityConfiguration;
 using cafe.infrastructure.Features.Event.EntityConfiguration;
+using cafe.infrastructure.Features.Roles.EntityConfiguration;
 using cafe.infrastructure.Features.Table.EntityConfiguration;
 using cafe.infrastructure.Features.Transaction.EntityConfiguration;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +39,9 @@ namespace cafe.infrastructure
             /// ********* Transaction **********
             new TransactionEntityConfiguration().Configure(builder.Entity<TransactionEntity>());
 
+            /// ********* Roles **********
+            new RolesEntityConfiguration().Configure(builder.Entity<IdentityRole>());
+
             base.OnModelCreating(builder);
         }
         public DbSet<CategoryEntity> Catgeories { get; set; }
@@ -52,6 +57,32 @@ namespace cafe.infrastructure
         public DbSet<EventEntity> Events { get; set; }
 
         public DbSet<TransactionEntity> TransactionsEntity { get; set; }
+
+        public async Task SeedAdminUser(UserManager<CafeUser> userManager)
+        {
+            var adminEmail = "ayman55@gmail.com";
+            var adminUser = await userManager.FindByEmailAsync(adminEmail);
+
+            if (adminUser == null)
+            {
+                adminUser = new CafeUser
+                {
+                    UserName = "ayman",
+                    Email = adminEmail,
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true,
+                };
+
+                var result = await userManager.CreateAsync(adminUser, "AymanAli@123");
+                
+                if (!result.Succeeded)
+                {
+                    var resoan = result.Errors;
+                    throw new Exception("Failed to create admin user.");
+                }
+
+                await userManager.AddToRoleAsync(adminUser, CafeRoles.Admin.ToString());
+            }
+        }
     }
 }
-

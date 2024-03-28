@@ -6,6 +6,7 @@ using cafe.Application.Features.Meal;
 using cafe.Application.Features.Meal.Service;
 using cafe.Application.Features.Table.Service;
 using cafe.Application.Features.Transaction.Service;
+using cafe.Application.Features.User.Service;
 using cafe.Domain.Category.Repository;
 using cafe.Domain.Category.Service;
 using cafe.Domain.Client.Repository;
@@ -19,6 +20,8 @@ using cafe.Domain.Table.Repository;
 using cafe.Domain.Table.Service;
 using cafe.Domain.Transaction.Repository;
 using cafe.Domain.Transaction.Service;
+using cafe.Domain.Users.Repository;
+using cafe.Domain.Users.Service;
 using cafe.infrastructure;
 using cafe.infrastructure.Features.Category.Repository;
 using cafe.infrastructure.Features.Client.Repository;
@@ -27,6 +30,7 @@ using cafe.infrastructure.Features.Event;
 using cafe.infrastructure.Features.Meal.Repository;
 using cafe.infrastructure.Features.Table.Repository;
 using cafe.infrastructure.Features.Transaction.Repository;
+using cafe.infrastructure.Features.User.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -64,7 +68,11 @@ public static class DependancyContainer
         /// ********* Transaction **********
         services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddScoped<ITransactionService, TransactionService>();
-        
+
+
+        /// ********* User **********
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserService, UserService>();
 
         services.AddDbContext<CafeDbContext>((options) =>
         {

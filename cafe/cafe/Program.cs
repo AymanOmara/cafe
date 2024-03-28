@@ -1,15 +1,21 @@
 ﻿using cafe.Domain.Users.entity;
 using cafe.infrastructure;
 using cafe.Ioc;
-using cafe.Utils;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-/// ********* Auth **********
-builder.Services.AddIdentityApiEndpoints<CafeUser>()
-   .AddEntityFrameworkStores<CafeDbContext>();
+
+builder.Services.AddIdentity<CafeUser, IdentityRole>()
+    .AddEntityFrameworkStores<CafeDbContext>()
+    .AddDefaultTokenProviders();
+
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -27,15 +33,44 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.RegisterServices(builder.Configuration);
 
 
-builder.Services.AddControllers();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    //options.SaveToken = true;
+    //options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        //RequireExpirationTime = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(
+            builder.Configuration["Jwt:Key"]
+            ))
+    };
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddControllers();
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{ 
+    var services = scope.ServiceProvider;
+    var dbContext = services.GetRequiredService<CafeDbContext>();
+    var userManager = services.GetRequiredService<UserManager<CafeUser>>();
+    await dbContext.Database.MigrateAsync();
+    await dbContext.SeedAdminUser(userManager);
+}
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -43,11 +78,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.MapIdentityApi<CafeUser>();
+
 app.UseAuthentication();
 app.UseAuthorization();
-
-//app.ConfigureExceptionHandler();
 app.MapControllers();
 
 app.Run();
