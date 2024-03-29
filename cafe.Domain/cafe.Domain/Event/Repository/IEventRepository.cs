@@ -5,8 +5,9 @@ namespace cafe.Domain.Event.Repository
 {
     public interface IEventRepository : IUnitOfWorkRepository<EventEntity>
     {
+        Task<EventEntity?> GetEventById(int id);
 
+        Task<EventEntity> CheckOut(EventEntity eventEntity);
     }
-
 }
 

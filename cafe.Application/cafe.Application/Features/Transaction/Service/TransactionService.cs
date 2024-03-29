@@ -20,6 +20,9 @@ namespace cafe.Application.Features.Transaction.Service
         public async Task<ICollection<ReadTransactionDTO>> GetAllTransactions()
         {
             var result = await _repository.GetAllTransaction();
+
+            
+
             return _mapper.Map<List<ReadTransactionDTO>>(result);
         }
 

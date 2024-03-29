@@ -10,6 +10,8 @@ namespace cafe.Domain.Event.DTO
             CreateMap<ReadEventDTO, EventEntity>().ReverseMap();
 
             CreateMap<CreateEventDTO, EventEntity>();
+
+            CreateMap<UpdateEventDTO,EventEntity>();
         }
     }
 }

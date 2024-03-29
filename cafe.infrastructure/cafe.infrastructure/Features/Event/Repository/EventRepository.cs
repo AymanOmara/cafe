@@ -13,6 +13,14 @@ namespace cafe.infrastructure.Features.Event
             _context = context;
         }
 
+        public async Task<EventEntity> CheckOut(EventEntity eventEntity)
+        {
+            eventEntity.CheckOut = true;
+            _context.Entry(eventEntity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return eventEntity;
+        }
+
         public async Task<EventEntity> Create(EventEntity entity)
         {
             await _context.AddAsync(entity);
@@ -32,6 +40,12 @@ namespace cafe.infrastructure.Features.Event
             return await _context.Events.ToListAsync();
         }
 
+        public async Task<EventEntity?> GetEventById(int id)
+        {
+            var result = await _context.Events.AsNoTracking().FirstOrDefaultAsync(ev=> ev.Id == id);
+            return result;
+        }
+
         public async Task<EventEntity> Update(EventEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
@@ -40,4 +54,3 @@ namespace cafe.infrastructure.Features.Event
         }
     }
 }
-

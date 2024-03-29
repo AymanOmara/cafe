@@ -27,5 +27,6 @@
         public bool CheckOut { get; set; }
 
         public bool Deleted { get; set; }
+
     }
 }

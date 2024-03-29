@@ -27,6 +27,18 @@ namespace cafe.Application.Features.User.Service
             }
         }
 
+        //todo
+        public Task<BaseResponse<string>> DeleteUSer(string userName)
+        {
+            throw new NotImplementedException();
+        }
+
+        //todo
+        public Task<BaseResponse<string>> GetAllUsers()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<BaseResponse<TokenDTO>> Login(LoginDTO login)
         {
             var result = await _userRepository.Login(login);

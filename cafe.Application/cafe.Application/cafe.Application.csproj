@@ -53,4 +53,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\cafe.Domain\cafe.Domain\cafe.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\.editorconfig" />
+  </ItemGroup>
 </Project>

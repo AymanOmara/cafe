@@ -8,5 +8,5 @@ namespace cafe.Domain.Transaction.Repository
 
 		Task<TransactionEntity> CreateTransaction(TransactionEntity transactionEntity);
     }
-} 
+}
 

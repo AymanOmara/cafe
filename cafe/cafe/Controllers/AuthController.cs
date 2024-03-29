@@ -1,5 +1,6 @@
 ﻿using cafe.Domain.Users.DTO;
 using cafe.Domain.Users.Service;
+using cafe.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,23 +17,25 @@ namespace cafe.Controllers
 
 		[Authorize(Roles = "Admin")]
 		[HttpPost("CreateUser")]
-		public async Task<ActionResult> CreateUser([FromBody] RegistrationDTO dto) {
+		public async Task<IActionResult> CreateUser([FromBody] RegistrationDTO dto) {
 			var result = await _userService.CreateUser(dto);
-            return Ok(result);
+            return result.ToResultResponse();
 		}
+
 		[AllowAnonymous]
         [HttpPost("login")]
-        public async Task<ActionResult> Login([FromBody] LoginDTO dto)
+        public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         {
             var result = await _userService.Login(dto);
-            return Ok(result);
+            return result.ToResultResponse();
         }
+
         [AllowAnonymous]
         [HttpPost("RefreshToken")]
-        public async Task<ActionResult> RefreshToken([FromBody] TokenDTO dto)
+        public async Task<IActionResult> RefreshToken([FromBody] TokenDTO dto)
         {
             var result = await _userService.RefreshToken(dto);
-            return Ok(result);
+            return result.ToResultResponse();
         }
     }
 }
