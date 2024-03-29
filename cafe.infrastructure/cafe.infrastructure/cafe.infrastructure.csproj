@@ -34,6 +34,12 @@
     <None Remove="Features\Roles\EntityConfiguration\" />
     <None Remove="Features\User\" />
     <None Remove="Features\User\Repository\" />
+    <None Remove="Features\Order\" />
+    <None Remove="Features\Order\EntityConfiguration\" />
+    <None Remove="Features\Order\Repository\" />
+    <None Remove="Features\Shift\" />
+    <None Remove="Features\Shift\Repository\" />
+    <None Remove="Features\Shift\EntityConfiguration\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
@@ -60,6 +66,12 @@
     <Folder Include="Features\Roles\EntityConfiguration\" />
     <Folder Include="Features\User\" />
     <Folder Include="Features\User\Repository\" />
+    <Folder Include="Features\Order\" />
+    <Folder Include="Features\Order\EntityConfiguration\" />
+    <Folder Include="Features\Order\Repository\" />
+    <Folder Include="Features\Shift\" />
+    <Folder Include="Features\Shift\Repository\" />
+    <Folder Include="Features\Shift\EntityConfiguration\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />

@@ -8,6 +8,7 @@ namespace cafe.infrastructure.Features.Employee.EntityConfiguration
     {
 		public EmployeeConiguration()
 		{
+
 		}
 
         public void Configure(EntityTypeBuilder<EmployeeEntity> builder)

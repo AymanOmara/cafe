@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Numerics;
-using AutoMapper;
+﻿using AutoMapper;
 using cafe.Domain.Common;
 using cafe.Domain.Event.DTO;
 using cafe.Domain.Event.Entity;
@@ -8,7 +6,6 @@ using cafe.Domain.Event.Repository;
 using cafe.Domain.Event.Service;
 using cafe.Domain.Transaction.Entity;
 using cafe.Domain.Transaction.Repository;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace cafe.Application.Features.Event
 {

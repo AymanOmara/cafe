@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using cafe.Application.Features.Meal.Service;
 using cafe.Domain.Meal;
 using cafe.Domain.Meal.Repository;
 using cafe.Application.Features.Meal.DTO;
+using cafe.Domain.Features.Meal.Service;
 
 namespace cafe.Application.Features.Meal
 {

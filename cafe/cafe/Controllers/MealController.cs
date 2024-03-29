@@ -1,11 +1,11 @@
 ﻿using cafe.Application.Features.Meal.DTO;
-using cafe.Application.Features.Meal.Service;
+using cafe.Domain.Features.Meal.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cafe.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     public class MealController : ControllerBase
     {

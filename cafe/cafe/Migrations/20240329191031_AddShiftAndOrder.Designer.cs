@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cafe.infrastructure;
 
@@ -11,9 +12,11 @@ using cafe.infrastructure;
 namespace cafe.Migrations
 {
     [DbContext(typeof(CafeDbContext))]
-    partial class CafeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240329191031_AddShiftAndOrder")]
+    partial class AddShiftAndOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -372,30 +375,22 @@ namespace cafe.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("DiscountPercent")
+                    b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("GuestReason")
+                    b.Property<string>("HospitalityReason")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsGuest")
+                    b.Property<bool>("IsHospitality")
                         .HasColumnType("bit");
 
                     b.Property<int>("ShiftEntityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TableId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ShiftEntityId");
-
-                    b.HasIndex("TableId");
 
                     b.ToTable("Orders");
                 });
@@ -440,7 +435,7 @@ namespace cafe.Migrations
                     b.Property<bool>("Closed")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("EndTime")
+                    b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("StartDate")
@@ -448,7 +443,7 @@ namespace cafe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shifts");
+                    b.ToTable("ShiftEntity");
                 });
 
             modelBuilder.Entity("cafe.Domain.Table.Entity.TableEntity", b =>
@@ -1107,20 +1102,12 @@ namespace cafe.Migrations
             modelBuilder.Entity("cafe.Domain.Order.Entity.OrderEntity", b =>
                 {
                     b.HasOne("cafe.Domain.Shift.Entity.ShiftEntity", "ShiftEntity")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("ShiftEntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("cafe.Domain.Table.Entity.TableEntity", "Table")
-                        .WithMany()
-                        .HasForeignKey("TableId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("ShiftEntity");
-
-                    b.Navigation("Table");
                 });
 
             modelBuilder.Entity("cafe.Domain.Order.Entity.OrderItemEntity", b =>
@@ -1183,11 +1170,6 @@ namespace cafe.Migrations
             modelBuilder.Entity("cafe.Domain.Order.Entity.OrderEntity", b =>
                 {
                     b.Navigation("OrderItems");
-                });
-
-            modelBuilder.Entity("cafe.Domain.Shift.Entity.ShiftEntity", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

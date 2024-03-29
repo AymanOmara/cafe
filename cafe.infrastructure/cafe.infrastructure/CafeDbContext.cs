@@ -3,12 +3,16 @@ using cafe.Domain.Client.Entity;
 using cafe.Domain.Employee;
 using cafe.Domain.Event.Entity;
 using cafe.Domain.Meal;
+using cafe.Domain.Order.Entity;
+using cafe.Domain.Shift.Entity;
 using cafe.Domain.Table.Entity;
 using cafe.Domain.Transaction.Entity;
 using cafe.Domain.Users.entity;
 using cafe.infrastructure.Features.Employee.EntityConfiguration;
 using cafe.infrastructure.Features.Event.EntityConfiguration;
+using cafe.infrastructure.Features.Order.EntityConfiguration;
 using cafe.infrastructure.Features.Roles.EntityConfiguration;
+using cafe.infrastructure.Features.Shift.EntityConfiguration;
 using cafe.infrastructure.Features.Table.EntityConfiguration;
 using cafe.infrastructure.Features.Transaction.EntityConfiguration;
 using Microsoft.AspNetCore.Identity;
@@ -42,8 +46,17 @@ namespace cafe.infrastructure
             /// ********* Roles **********
             new RolesEntityConfiguration().Configure(builder.Entity<IdentityRole>());
 
+            /// ********* Order **********
+            new OrderEntityConfiguration().Configure(builder.Entity<OrderEntity>());
+
+            new OrderItemEntityConfiguration().Configure(builder.Entity<OrderItemEntity>());
+
+            /// ********* Shift **********
+            new ShiftEntityConfiguration().Configure(builder.Entity<ShiftEntity>());
+
             base.OnModelCreating(builder);
         }
+
         public DbSet<CategoryEntity> Catgeories { get; set; }
 
         public DbSet<MealEntity> Meals { get; set; }
@@ -57,6 +70,14 @@ namespace cafe.infrastructure
         public DbSet<EventEntity> Events { get; set; }
 
         public DbSet<TransactionEntity> TransactionsEntity { get; set; }
+
+        public DbSet<OrderEntity> Orders { get; set; }
+
+        public DbSet<OrderItemEntity> OrderItems { get; set; }
+
+        public DbSet<ShiftEntity> Shifts { get; set; }
+        
+
 
         public async Task SeedAdminUser(UserManager<CafeUser> userManager)
         {
@@ -77,8 +98,9 @@ namespace cafe.infrastructure
                 
                 if (!result.Succeeded)
                 {
-                    var resoan = result.Errors;
-                    throw new Exception("Failed to create admin user.");
+                    var resoan = result.Errors.Select(e=>e.Description).ToList();
+                    
+                    throw new Exception(string.Join(",",resoan));
                 }
 
                 await userManager.AddToRoleAsync(adminUser, CafeRoles.Admin.ToString());

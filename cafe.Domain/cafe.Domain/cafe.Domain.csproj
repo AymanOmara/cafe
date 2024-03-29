@@ -14,7 +14,6 @@
     <None Remove="Category\Service\" />
     <None Remove="Meal\Entity\" />
     <None Remove="Meal\Repository\" />
-    <None Remove="Meal\Service\" />
     <None Remove="Users\" />
     <None Remove="Users\entity\" />
     <None Remove="Category\DTO\" />
@@ -46,6 +45,17 @@
     <None Remove="Users\Repository\" />
     <None Remove="Users\Service\" />
     <None Remove="Users\DTO\" />
+    <None Remove="Order\" />
+    <None Remove="Order\Entity\" />
+    <None Remove="Shift\" />
+    <None Remove="Shift\Entity\" />
+    <None Remove="Order\Repository\" />
+    <None Remove="Shift\Repository\" />
+    <None Remove="Shift\Service\" />
+    <None Remove="Shift\DTO\" />
+    <None Remove="Order\DTO\" />
+    <None Remove="Meal\DTO\" />
+    <None Remove="Meal\Service\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Category\" />
@@ -55,7 +65,6 @@
     <Folder Include="Category\Service\" />
     <Folder Include="Meal\Entity\" />
     <Folder Include="Meal\Repository\" />
-    <Folder Include="Meal\Service\" />
     <Folder Include="Users\" />
     <Folder Include="Users\entity\" />
     <Folder Include="Category\DTO\" />
@@ -88,6 +97,17 @@
     <Folder Include="Users\Repository\" />
     <Folder Include="Users\Service\" />
     <Folder Include="Users\DTO\" />
+    <Folder Include="Order\" />
+    <Folder Include="Order\Entity\" />
+    <Folder Include="Shift\" />
+    <Folder Include="Shift\Entity\" />
+    <Folder Include="Order\Repository\" />
+    <Folder Include="Shift\Repository\" />
+    <Folder Include="Shift\Service\" />
+    <Folder Include="Shift\DTO\" />
+    <Folder Include="Order\DTO\" />
+    <Folder Include="Meal\DTO\" />
+    <Folder Include="Meal\Service\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using cafe.infrastructure;
 
@@ -11,9 +12,11 @@ using cafe.infrastructure;
 namespace cafe.Migrations
 {
     [DbContext(typeof(CafeDbContext))]
-    partial class CafeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240329203113_ShiftTableMigration")]
+    partial class ShiftTableMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -372,7 +375,7 @@ namespace cafe.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("DiscountPercent")
+                    b.Property<decimal>("Discount")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("GuestReason")
@@ -1107,7 +1110,7 @@ namespace cafe.Migrations
             modelBuilder.Entity("cafe.Domain.Order.Entity.OrderEntity", b =>
                 {
                     b.HasOne("cafe.Domain.Shift.Entity.ShiftEntity", "ShiftEntity")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("ShiftEntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1183,11 +1186,6 @@ namespace cafe.Migrations
             modelBuilder.Entity("cafe.Domain.Order.Entity.OrderEntity", b =>
                 {
                     b.Navigation("OrderItems");
-                });
-
-            modelBuilder.Entity("cafe.Domain.Shift.Entity.ShiftEntity", b =>
-                {
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
