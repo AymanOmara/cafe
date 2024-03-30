@@ -2,7 +2,7 @@
 
 namespace cafe.Domain.Category.Repository
 {
-	public interface ICategoryRepository:IUnitOfWorkRepository<CategoryEntity>
+	public interface ICategoryRepository:IGenericRepository<CategoryEntity>
 	{
 
     }

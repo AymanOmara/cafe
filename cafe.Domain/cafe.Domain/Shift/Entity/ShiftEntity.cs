@@ -1,4 +1,5 @@
 ﻿using cafe.Domain.Order.Entity;
+using cafe.Domain.Transaction.Entity;
 
 namespace cafe.Domain.Shift.Entity
 {
@@ -15,5 +16,7 @@ namespace cafe.Domain.Shift.Entity
         public decimal TotalRevenue => Orders == null ? 0: Orders.Sum(order=> order.TotalPrice);
 
         public ICollection<OrderEntity>? Orders { get; set; }
+
+        public ICollection<TransactionEntity>? Transactions { get; set; }
     }
 }

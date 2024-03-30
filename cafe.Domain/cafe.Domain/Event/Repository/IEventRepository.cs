@@ -3,7 +3,7 @@ using cafe.Domain.Event.Entity;
 
 namespace cafe.Domain.Event.Repository
 {
-    public interface IEventRepository : IUnitOfWorkRepository<EventEntity>
+    public interface IEventRepository : IGenericRepository<EventEntity>
     {
         Task<EventEntity?> GetEventById(int id);
 

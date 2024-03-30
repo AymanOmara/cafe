@@ -13,6 +13,10 @@ namespace cafe.Domain.Shift
 		Task<ShiftEntity?> GetCurrentActiveShift();
 
 		Task<ICollection<OrderEntity>> GetOrdersOnShift(int shiftId);
-	}
+
+		Task<ShiftEntity> GetShiftDetails(int shiftId);
+
+		Task<ICollection<ShiftEntity>> GetAllShifts ();
+    }
 }
 

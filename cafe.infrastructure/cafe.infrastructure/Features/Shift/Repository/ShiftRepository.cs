@@ -30,6 +30,12 @@ namespace cafe.infrastructure.Features.Shift
             return true;
         }
 
+        public async Task<ICollection<ShiftEntity>> GetAllShifts()
+        {
+            var result = await _context.Shifts.ToListAsync();
+            return result;
+        }
+
         public async Task<ShiftEntity?> GetCurrentActiveShift()
         {
             var shift = await _context.Shifts
@@ -39,12 +45,19 @@ namespace cafe.infrastructure.Features.Shift
 
         public async Task<ICollection<OrderEntity>> GetOrdersOnShift(int shiftId)
         {
-            var shift = await _context.Shifts
-                .Include(s => s.Orders)
-                .ThenInclude(s => s.OrderItems)
-                .ThenInclude(s => s.Meal)
-                .FirstOrDefaultAsync(s => s.Id == shiftId);
+            var shift = await GetShiftDetails(shiftId);
             return shift?.Orders ?? new List<OrderEntity>() { };
+        }
+
+        public async Task<ShiftEntity?> GetShiftDetails(int shiftId)
+        {
+            var shift = await _context.Shifts
+               .Include(s => s.Orders)
+               .ThenInclude(s => s.OrderItems)
+               .ThenInclude(s => s.Meal)
+               .Include(s=>s.Transactions)
+               .FirstOrDefaultAsync(s => s.Id == shiftId);
+            return shift;
         }
 
         public async Task<Result<ShiftEntity, Exception>> StartNewShift()

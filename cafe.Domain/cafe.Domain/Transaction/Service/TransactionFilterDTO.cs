@@ -6,8 +6,6 @@ namespace cafe.Domain.Transaction.Service
 	{
         public TransactionType? TransactionType { get; set; }
 
-        public DateTime? CreatedDate { get; set; }
-
         public DateTime? StartDate { get; set; }
 
         public DateTime? EndDate { get; set; }
@@ -15,5 +13,7 @@ namespace cafe.Domain.Transaction.Service
         public int? TransactionId { get; set; }
 
         public int PageNumber { get; set; }
+
+        public int PageSize { get; set; } = 10;
     }
 }

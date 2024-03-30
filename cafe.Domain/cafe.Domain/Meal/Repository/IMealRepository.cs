@@ -2,7 +2,7 @@
 
 namespace cafe.Domain.Meal.Repository
 {
-    public interface IMealRepository: IUnitOfWorkRepository<MealEntity>
+    public interface IMealRepository: IGenericRepository<MealEntity>
     {
          
     }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace cafe.Controllers
 {
-	[Authorize(Roles = "Admin")]
+	//[Authorize(Roles = "Admin")]
 	[Route("api/[controller]")]
 	public class ShiftController:ControllerBase
 	{
@@ -34,10 +34,18 @@ namespace cafe.Controllers
             var result = await _shiftService.GetCurrentActiveShift();
             return result.ToResultResponse();
         }
-        [HttpGet("GetCurrentActiveShift/{pageNumber}")]
-        public async Task<IActionResult> GetPaginationShifts(int pageNumber)
+
+        [HttpGet("GetPaginationShifts")]
+        public async Task<IActionResult> GetPaginationShifts(int pageNumber,int pageSize)
         {
-            var result = await _shiftService.GetPaginatedShifts(pageNumber);
+            var result = await _shiftService.GetPaginatedShifts(pageNumber, pageSize);
+            return result.ToResultResponse();
+        }
+
+        [HttpGet("Details")]
+        public async Task<IActionResult> GetShiftDetails(int shiftId)
+        {
+            var result = await _shiftService.GetShiftDetails(shiftId);
             return result.ToResultResponse();
         }
     }

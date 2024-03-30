@@ -1,6 +1,6 @@
 ﻿namespace cafe.Domain.Shift.DTO
 {
-	public class ReadShiftsDTO
+	public class ReadShiftDTO
 	{
         public int Id { get; set; }
 
@@ -11,7 +11,5 @@
         public bool Closed { get; set; }
 
         public decimal TotalRevenue { get; set; }
-
     }
 }
-

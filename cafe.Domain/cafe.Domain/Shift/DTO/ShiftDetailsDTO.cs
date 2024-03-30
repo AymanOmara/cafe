@@ -1,10 +1,10 @@
 ﻿using cafe.Domain.Order.DTO;
-using cafe.Domain.Order.Entity;
+using cafe.Domain.Transaction.DTO;
 
 namespace cafe.Domain.Shift.DTO
 {
-	public class ShiftDetailsDTO
-	{
+    public class ShiftDetailsDTO
+    {
         public int Id { get; set; }
 
         public DateTime StartDate { get; set; }
@@ -16,7 +16,9 @@ namespace cafe.Domain.Shift.DTO
         public decimal TotalRevenue { get; set; }
 
         public ICollection<ReadOrderDTO>? Orders { get; set; }
-        
+
+        public ICollection<ReadTransactionDTO> Transactions { get; set; }
+
     }
 }
 

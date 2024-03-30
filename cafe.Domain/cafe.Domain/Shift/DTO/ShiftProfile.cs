@@ -7,12 +7,9 @@ namespace cafe.Domain.Shift.DTO
     {
         public ShiftProfile()
         {
-            CreateMap<ReadShiftsDTO, ShiftEntity>();
+            CreateMap<ReadShiftDTO, ShiftEntity>().ReverseMap();
 
             CreateMap<ShiftEntity, ShiftDetailsDTO>().ReverseMap();
-
-
         }
     }
 }
-

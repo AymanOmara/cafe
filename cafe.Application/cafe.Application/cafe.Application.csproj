@@ -27,6 +27,8 @@
     <None Remove="Features\User\Service\" />
     <None Remove="Features\Shift\" />
     <None Remove="Features\Meal\Service\" />
+    <None Remove="..\..\.editorconfig" />
+    <None Remove="Features\Transaction\Utils\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
@@ -49,11 +51,9 @@
     <Folder Include="Features\User\Service\" />
     <Folder Include="Features\Shift\" />
     <Folder Include="Features\Meal\Service\" />
+    <Folder Include="Features\Transaction\Utils\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\cafe.Domain\cafe.Domain\cafe.Domain.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\.editorconfig" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 ﻿namespace cafe.Domain.Common
 {
-	public interface IUnitOfWorkRepository<T>
+	public interface IGenericRepository<T> where T : class
 	{
         Task<ICollection<T>> GetAllRecords();
 

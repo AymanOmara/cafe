@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Transaction.DTO;
+﻿using cafe.Domain.Common;
+using cafe.Domain.Transaction.DTO;
 
 namespace cafe.Domain.Transaction.Service
 {
@@ -6,7 +7,7 @@ namespace cafe.Domain.Transaction.Service
 	{
 		Task<ICollection<ReadTransactionDTO>> GetAllTransactions();
 
-		Task<ICollection<ReadTransactionDTO>> GetFilterdTransaction(TransactionFilterDTO filterDTO);
+        Task<BaseResponse<PaginatedResult<ICollection<ReadTransactionDTO>>>> GetFilterdTransaction(TransactionFilterDTO filterDTO);
     }
 }
 

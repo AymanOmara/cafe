@@ -2,48 +2,44 @@
 using cafe.Domain.Common;
 using cafe.Domain.Event.DTO;
 using cafe.Domain.Event.Entity;
-using cafe.Domain.Event.Repository;
 using cafe.Domain.Event.Service;
 using cafe.Domain.Transaction.Entity;
-using cafe.Domain.Transaction.Repository;
+
 
 namespace cafe.Application.Features.Event
 {
     public class EventService : IEventService
     {
-        private readonly IEventRepository _repository;
-
-        private readonly ITransactionRepository _transactionRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         private readonly IMapper _mapper;
 
-        public EventService(IEventRepository repository, ITransactionRepository transactionRepository, IMapper mapper)
+        public EventService(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _repository = repository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _transactionRepository = transactionRepository;
         }
 
         public async Task<BaseResponse<string>> CancelEvent(int id, string resaon)
         {
-            var eventEntity = await _repository.GetEventById(id);
+            var eventEntity = await _unitOfWork.Events.GetEventById(id);
             if (eventEntity == null) {
                 return new BaseResponse<string> { statusCode = 404,message = "event not found"};
             }
             eventEntity.CancelationReason = resaon;
-            await _repository.Delete(eventEntity);
+            await _unitOfWork.Events.Delete(eventEntity);
             return new BaseResponse<string> { data = "sucess" ,statusCode = 200,success = true,message = "event deleted successfully"};
         }
 
         public async Task<BaseResponse<string>> Checkout(UpdateEventDTO dto)
         {
-            var currentEvent = await _repository.GetEventById(dto.Id);
+            var currentEvent = await _unitOfWork.Events.GetEventById(dto.Id);
             var entity = _mapper.Map<EventEntity>(dto);
             if (entity.RemainingAmount > 0) {
                 var message = "error please close the amount first";
                 return new BaseResponse<string> { statusCode = 400, data = message, message= message };
             }
-            var _ = await _repository.CheckOut(entity);
+            var _ = await _unitOfWork.Events.CheckOut(entity);
             var revenue = currentEvent.Deposit - dto.Deposit;
             if (revenue > 0)
             {
@@ -52,7 +48,7 @@ namespace cafe.Application.Features.Event
                     TransactionType = TransactionType.ReserveEvent,
                     Amount = revenue
                 };
-                await _transactionRepository.CreateTransaction(transactionEntity);
+                await _unitOfWork.Transactions.CreateTransaction(transactionEntity);
             }
             return new BaseResponse<string> { statusCode = 200, data = "success",message = "check out successfully" };
         }
@@ -67,27 +63,27 @@ namespace cafe.Application.Features.Event
                 return new BaseResponse<ReadEventDTO> { message = "error deposite cannot be gratter than price", statusCode = 400 };
             }
             var entity = _mapper.Map<EventEntity>(dto);
-            var result = await _repository.Create(entity);
+            var result = await _unitOfWork.Events.Create(entity);
            
             var transactionEntity = new TransactionEntity
             {
                 TransactionType = TransactionType.ReserveEvent,
                 Amount = dto.Deposit
             };
-            await _transactionRepository.CreateTransaction(transactionEntity);
+            await _unitOfWork.Transactions.CreateTransaction(transactionEntity);
             var mappedResult = _mapper.Map<ReadEventDTO>(result);
             return new BaseResponse<ReadEventDTO>{ statusCode = 200,data = mappedResult, success = true ,message = ""};
         }
 
         public async Task<ICollection<ReadEventDTO>> GetUpcommingEvents()
         {
-            var result = await _repository.GetAllRecords();
+            var result = await _unitOfWork.Events.GetAllRecords();
             return _mapper.Map<List<ReadEventDTO>>(result.Where(eve => !eve.Deleted && !eve.CheckOut));
         }
 
         public async Task<BaseResponse<ReadEventDTO>> UpdateEvent(UpdateEventDTO dto)
         {
-            var currentEvent = await _repository.GetEventById(dto.Id);
+            var currentEvent = await _unitOfWork.Events.GetEventById(dto.Id);
             if (currentEvent == null) {
                 return new BaseResponse<ReadEventDTO> { statusCode = 404, message = "event not found" };
             }
@@ -101,7 +97,7 @@ namespace cafe.Application.Features.Event
                 return new BaseResponse<ReadEventDTO> { message = "error deposite cannot be gratter than price", statusCode = 400 };
             }
             var entity = _mapper.Map<EventEntity>(dto);
-            var result = await _repository.Update(entity);
+            var result = await _unitOfWork.Events.Update(entity);
             var revenue = currentEvent.Deposit - dto.Deposit;
             if (revenue > 0) {
                 var transactionEntity = new TransactionEntity
@@ -109,7 +105,7 @@ namespace cafe.Application.Features.Event
                     TransactionType = TransactionType.ReserveEvent,
                     Amount = revenue
                 };
-                await _transactionRepository.CreateTransaction(transactionEntity);
+                await _unitOfWork.Transactions.CreateTransaction(transactionEntity);
             }
             
             var mappedResult = _mapper.Map<ReadEventDTO>(result);

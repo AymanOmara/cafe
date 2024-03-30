@@ -15,6 +15,8 @@ namespace cafe.infrastructure.Features.Transaction.Repository
 
         public async Task<TransactionEntity> CreateTransaction(TransactionEntity transactionEntity)
         {
+            var shift = await _context.Shifts.FirstOrDefaultAsync(shift => shift.Closed == false);
+            transactionEntity.Shift = shift;
             await _context.AddAsync(transactionEntity);
             await _context.SaveChangesAsync();
             return transactionEntity;

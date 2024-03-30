@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using cafe.Domain.Client.DTO;
 using cafe.Domain.Client.Entity;
-using cafe.Domain.Client.Repository;
 using cafe.Domain.Client.Service;
+using cafe.Domain.Common;
 using cafe.Domain.Table.Entity;
-using cafe.Domain.Table.Repository;
 
 namespace cafe.Application.Features.Client.Service
 {
@@ -12,15 +11,12 @@ namespace cafe.Application.Features.Client.Service
     {
         private readonly IMapper _mapper;
 
-        private readonly IClientRepository _clientRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        private readonly ITableRepository _tableRepository;
-
-        public ClientService(IMapper mapper, IClientRepository repository, ITableRepository tableRepository)
+        public ClientService(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
-            _clientRepository = repository;
-            _tableRepository = tableRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ReadClientDTO> AddClient(WriteClientDTO dto)
@@ -28,56 +24,56 @@ namespace cafe.Application.Features.Client.Service
 
             var clientEntity = _mapper.Map<ClientEntity>(dto);
 
-            var result = await _clientRepository.Create(clientEntity);
+            var result = await _unitOfWork.Clients.Create(clientEntity);
 
             if (dto.IsVIP)
             {
                 var tableEntity = _mapper.Map<TableEntity>(dto);
                 tableEntity.Client = result;
                 tableEntity.LobbyName = LobbyName.Specail;
-                _tableRepository.CreateTable(tableEntity);
+                _unitOfWork.Tables.CreateTable(tableEntity);
             }
             return _mapper.Map<ReadClientDTO>(result);
         }
 
         public async Task DeleteClient(UpdateClientDTO dto)
         {
-            var assocaitedTable = await _tableRepository.GetTableByClientId(dto.Id);
+            var assocaitedTable = await _unitOfWork.Tables.GetTableByClientId(dto.Id);
 
             if (assocaitedTable == null)
             {
                 var clientEntity = _mapper.Map<ClientEntity>(dto);
 
-                await _clientRepository.Delete(clientEntity);
+                await _unitOfWork.Clients.Delete(clientEntity);
             }
             else
             {
-                await _tableRepository.ChangeDeleteStatus(assocaitedTable.Id, true);
-                await _clientRepository.MarkClientDeleted(assocaitedTable.Client);
+                await _unitOfWork.Tables.ChangeDeleteStatus(assocaitedTable.Id, true);
+                await _unitOfWork.Clients.MarkClientDeleted(assocaitedTable.Client);
             }
         }
 
         public async Task<ICollection<ReadClientDTO>> GetAllClients()
         {
-            var result = await _clientRepository.GetAllRecords();
+            var result = await _unitOfWork.Clients.GetAllRecords();
             return _mapper.Map<List<ReadClientDTO>>(result.Where(client => !client.Deleted));
         }
 
         public async Task<ReadClientDTO> UpdateClient(UpdateClientDTO dto)
         {
             var clientEntity = _mapper.Map<ClientEntity>(dto);
-            var result = await _clientRepository.Update(clientEntity);
-            var assocaitedTable = await _tableRepository.GetTableByClientId(dto.Id);
+            var result = await _unitOfWork.Clients.Update(clientEntity);
+            var assocaitedTable = await _unitOfWork.Tables.GetTableByClientId(dto.Id);
 
             if (dto.IsVIP && assocaitedTable == null)
             {
                 var tableEntity = _mapper.Map<TableEntity>(dto);
                 tableEntity.LobbyName = LobbyName.Specail;
-                _tableRepository.CreateTable(tableEntity);
+                _unitOfWork.Tables.CreateTable(tableEntity);
             }
             else
             {
-                await _tableRepository.ChangeDeleteStatus(assocaitedTable.Id, !dto.IsVIP);
+                await _unitOfWork.Tables.ChangeDeleteStatus(assocaitedTable.Id, !dto.IsVIP);
             }
 
             return _mapper.Map<ReadClientDTO>(result);

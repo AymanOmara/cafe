@@ -2,7 +2,7 @@
 
 namespace cafe.Domain.Employee.Repository
 {
-	public interface IEmployeeRepository: IUnitOfWorkRepository<EmployeeEntity>
+	public interface IEmployeeRepository: IGenericRepository<EmployeeEntity>
     {
         Task<EmployeeEntity> PaySalary(EmployeeEntity employeeEntity);
     }
