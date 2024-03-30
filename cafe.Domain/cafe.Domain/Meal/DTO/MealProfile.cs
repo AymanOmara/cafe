@@ -8,7 +8,7 @@ public class MealProfile : Profile
 {
     public MealProfile()
     {
-        CreateMap<MealEntity, ReadOnlyMealDto>();
+        CreateMap<MealEntity, ReadOnlyMealDto>().ReverseMap();
 
         CreateMap<WriteOnlyMealDto, MealEntity>();
 

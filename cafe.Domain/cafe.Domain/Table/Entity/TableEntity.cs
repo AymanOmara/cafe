@@ -1,4 +1,5 @@
 ﻿using cafe.Domain.Client.Entity;
+using cafe.Domain.Order.Entity;
 
 namespace cafe.Domain.Table.Entity
 {
@@ -15,5 +16,7 @@ namespace cafe.Domain.Table.Entity
 		public ClientEntity? Client { get; set; }
 
         public int? ClientId { get; set; }
+
+		public ICollection<OrderEntity>? Orders { get; set; }
     }
 }

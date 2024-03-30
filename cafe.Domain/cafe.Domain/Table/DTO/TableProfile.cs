@@ -7,7 +7,7 @@ namespace cafe.Domain.Table.DTO
 	{
 		public TableProfile()
 		{
-			CreateMap<TableEntity, ReadTableDTO>();
+			CreateMap<TableEntity, ReadTableDTO>().ReverseMap();
 		}
 	}
 }

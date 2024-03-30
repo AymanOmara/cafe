@@ -56,6 +56,7 @@
     <None Remove="Order\DTO\" />
     <None Remove="Meal\DTO\" />
     <None Remove="Meal\Service\" />
+    <None Remove="Order\Service\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Category\" />
@@ -108,6 +109,7 @@
     <Folder Include="Order\DTO\" />
     <Folder Include="Meal\DTO\" />
     <Folder Include="Meal\Service\" />
+    <Folder Include="Order\Service\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />

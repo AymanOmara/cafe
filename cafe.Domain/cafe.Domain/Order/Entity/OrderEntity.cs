@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Shift.Entity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using cafe.Domain.Shift.Entity;
 using cafe.Domain.Table.Entity;
 
 namespace cafe.Domain.Order.Entity
@@ -15,15 +16,22 @@ namespace cafe.Domain.Order.Entity
 
 		public string GuestReason { get; set; } = string.Empty;
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
-		public TableEntity Table { get; set; } = null!;
+        [ForeignKey("TableId")]
+        public int? TableId { get; set; }
+
+        public TableEntity? Table { get; set; }
 
 		public ICollection<OrderItemEntity> OrderItems { get; set; } = null!;
 
         public ShiftEntity ShiftEntity { get; set; } = null!;
 
-		public decimal TotalPrice
+        public PaymentMethod PaymentMethod { get; set; }
+
+        public bool IsTakeAway { get; set; }
+
+        public decimal TotalPrice
         {
             get { return IsGuest ? 0: OrderItems.Sum(items=> items.ItemPrice)*DiscountPercent; }
         }

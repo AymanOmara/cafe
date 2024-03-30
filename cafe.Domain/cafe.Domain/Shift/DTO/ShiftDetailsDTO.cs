@@ -17,8 +17,7 @@ namespace cafe.Domain.Shift.DTO
 
         public ICollection<ReadOrderDTO>? Orders { get; set; }
 
-        public ICollection<ReadTransactionDTO> Transactions { get; set; }
-
+        public ICollection<ReadTransactionDTO>? Transactions { get; set; }
     }
 }
 

@@ -1,5 +1,4 @@
-﻿using cafe.Domain.Common;
-using cafe.Domain.Employee;
+﻿using cafe.Domain.Employee;
 using cafe.Domain.Employee.Repository;
 using Microsoft.EntityFrameworkCore;
 

@@ -6,7 +6,7 @@ namespace cafe.Domain.Order.DTO
 	{
         public int Id { get; set; }
 
-        public ReadOnlyMealDto Meal { get; set; }
+        public ReadOnlyMealDto? Meal { get; set; }
 
         public int Count { get; set; }
 

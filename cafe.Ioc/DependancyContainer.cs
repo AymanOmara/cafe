@@ -22,6 +22,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using cafe.Domain.Common;
 using cafe.infrastructure.Common;
+using cafe.Domain.Order.Service;
+using cafe.Application.Features.Order.Service;
 
 namespace cafe.Ioc;
 
@@ -58,6 +60,9 @@ public static class DependancyContainer
 
         /// ********* Shift **********
         services.AddScoped<IShiftService, ShiftService>();
+
+        /// ********* Shift **********
+        services.AddScoped<IOrderService, OrderService>();
 
         services.AddDbContext<CafeDbContext>((options) =>
         {

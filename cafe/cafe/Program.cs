@@ -8,6 +8,7 @@ using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using cafe.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,7 +79,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+//app.ConfigureExceptionHandler();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
