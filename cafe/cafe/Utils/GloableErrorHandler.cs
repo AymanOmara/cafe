@@ -16,24 +16,12 @@ namespace cafe.Utils
                     context.Response.ContentType = "application/json";
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
 
-                    if (context.Response.StatusCode == 400)
+                    await context.Response.WriteAsync(new BaseResponse<string>()
                     {
-                        await context.Response.WriteAsync(new BaseResponse<string>()
-                        {
-                            data = "somthing wnet wrong tray agian later",
-                            statusCode = context.Response.StatusCode,
-                            message = $"Internal Server Error.{contextFeature.Error.Data}"
-                        }.ToString());
-                    }
-                    else if (contextFeature != null)
-                    {
-                        await context.Response.WriteAsync(new BaseResponse<string>()
-                        {
-                            data = "somthing wnet wrong tray agian later",
-                            statusCode = context.Response.StatusCode,
-                            message = $"Internal Server Error.{contextFeature.Error.Data}"
-                        }.ToString());
-                    }
+                        data = "somthing wnet wrong tray agian later",
+                        statusCode = context.Response.StatusCode,
+                        message = $"Internal Server Error.{contextFeature.Error.Data}"
+                    }.ToString());
                 });
             });
 

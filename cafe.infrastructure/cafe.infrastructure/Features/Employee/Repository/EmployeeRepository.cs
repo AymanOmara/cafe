@@ -1,5 +1,6 @@
 ﻿using cafe.Domain.Employee;
 using cafe.Domain.Employee.Repository;
+using cafe.Domain.Transaction.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace cafe.infrastructure.Features.Employee.Repository
@@ -41,16 +42,38 @@ namespace cafe.infrastructure.Features.Employee.Repository
 
         public async Task<EmployeeEntity> Update(EmployeeEntity employeeEntity)
         {
+            foreach (var advance in employeeEntity.Advance)
+            {
+                if (advance.Id == 0)
+                {
+                    if (advance.Amount > 0)
+                    {
+                        await AddTransaction(advance.Amount);
+                    }
+                }
+                else
+                {
+                    var currentEmployee = await _context.Employees.Include(adv => adv.Advance).AsNoTracking().FirstOrDefaultAsync(emp => emp.Id == employeeEntity.Id);
+                    var currentAdvance = currentEmployee.Advance.FirstOrDefault(adv => advance.Id == adv.Id);
+                    var totalAdance =  advance.Amount - currentAdvance.Amount;
+                    if (totalAdance != 0)
+                    {
+                        await AddTransaction(totalAdance);
+                    }
+                }
+            }
+
             SalaryItemUpdate(employeeEntity);
             _context.Entry(employeeEntity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            
+            
             return employeeEntity;
         }
 
 
         private void SalaryItemsCleaner(EmployeeEntity employeeEntity)
         {
-
             foreach (var advance in employeeEntity.Advance)
             {
                 _context.Entry(advance).State = EntityState.Deleted;
@@ -70,7 +93,7 @@ namespace cafe.infrastructure.Features.Employee.Repository
             employeeEntity?.Incentive?.Clear();
         }
 
-        private void SalaryItemUpdate(EmployeeEntity employeeEntity)
+        private async void SalaryItemUpdate(EmployeeEntity employeeEntity)
         {
             foreach (var deduction in employeeEntity.Deductions)
             {
@@ -106,6 +129,12 @@ namespace cafe.infrastructure.Features.Employee.Repository
                 }
             }
         }
+
+        private async Task AddTransaction(decimal Amount)
+        {
+            var currentShift = await _context.Shifts.FirstOrDefaultAsync(shift=> shift.Closed == false);
+            var transaction = new TransactionEntity() {TransactionType = TransactionType.SalaryAdvance ,Shift= currentShift,Amount = Amount };
+            await _context.TransactionsEntity.AddAsync(transaction);
+        }
     }
 }
-
