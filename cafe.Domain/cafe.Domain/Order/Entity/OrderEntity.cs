@@ -33,7 +33,7 @@ namespace cafe.Domain.Order.Entity
 
         public decimal TotalPrice
         {
-            get { return IsGuest ? 0: OrderItems.Sum(items=> items.ItemPrice)*DiscountPercent; }
+            get { return IsGuest ? 0 : OrderItems.Sum(items => items.TotalPrice)* ((100 - DiscountPercent) / 100); }
         }
     }
 }

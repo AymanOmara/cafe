@@ -8,7 +8,7 @@ namespace cafe.Domain.Order.DTO
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
-        public decimal Discount { get; set; }
+        public decimal DiscountPercent { get; set; }
 
         public bool IsGuest { get; set; }
 
@@ -19,7 +19,8 @@ namespace cafe.Domain.Order.DTO
         public ReadTableDTO Table { get; set; } = null!;
 
         public ICollection<ReadOrderItemDTO> OrderItems { get; set; } = null!;
-        
+
+        public decimal TotalPrice { get; set; }
     }
 }
 

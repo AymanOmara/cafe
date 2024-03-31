@@ -38,7 +38,7 @@ namespace cafe.infrastructure.Features.Shift
 
         public async Task<ShiftEntity?> GetCurrentActiveShift()
         {
-            var shift = await _context.Shifts
+            var shift = await _context.Shifts.Include(a=> a.Orders).ThenInclude(or=>or.OrderItems).ThenInclude(or=>or.Meal)
                 .FirstOrDefaultAsync(shift => shift.Closed == false);
             return shift;
         }

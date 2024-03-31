@@ -13,7 +13,7 @@ namespace cafe.Domain.Shift.Entity
 
         public bool Closed { get; set; }
 
-        public decimal TotalRevenue => Orders == null ? 0: Orders.Sum(order=> order.TotalPrice);
+        public decimal TotalRevenue { get { return Orders == null ? 0 : Orders.Sum(order => order.TotalPrice); } }
 
         public ICollection<OrderEntity>? Orders { get; set; }
 

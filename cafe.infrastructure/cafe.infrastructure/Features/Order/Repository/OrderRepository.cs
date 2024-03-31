@@ -24,6 +24,13 @@ namespace cafe.infrastructure.Features.Order.Repository
             {
                 return new Exception("the table alerdy has active order");
             }
+            
+            if (entity.IsTakeAway) {
+                entity.IsActive = false;
+                if (entity.TotalPrice > 0) {
+                    await AddTransaction(entity.TotalPrice);
+                }
+            }
             entity.ShiftEntity = currentShift;
             await _context.Orders.AddAsync(entity);
             await _context.SaveChangesAsync();
@@ -33,7 +40,7 @@ namespace cafe.infrastructure.Features.Order.Repository
 
         public async Task<ICollection<OrderEntity>> GetAllRecords()
         {
-            var result = await _context.Orders.Include(order => order.OrderItems).ThenInclude(or => or.Meal).Include(or => or.ShiftEntity).ToListAsync();
+            var result = await _context.Orders.Include(order=>order.Table).Include(order => order.OrderItems).ThenInclude(or => or.Meal).Include(or => or.ShiftEntity).ToListAsync();
             return result;
         }
 
@@ -52,7 +59,9 @@ namespace cafe.infrastructure.Features.Order.Repository
             }
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return entity;
+            var result  = await GetOrderById(entity.Id);
+
+            return result;
         }
 
         public async Task<OrderEntity?> GetOrderById(int orderId)
@@ -63,7 +72,7 @@ namespace cafe.infrastructure.Features.Order.Repository
 
         public async Task<Result<bool, Exception>> CheckOutOrder(int orderId, PaymentMethod paymentMethod)
         {
-            var order = await _context.Orders.FirstOrDefaultAsync(or => or.Id == orderId);
+            var order =  await GetOrderById(orderId);
             order.PaymentMethod = paymentMethod;
             order.IsActive = false;
             _context.Entry(order).State = EntityState.Modified;
@@ -85,7 +94,6 @@ namespace cafe.infrastructure.Features.Order.Repository
             await _context.TransactionsEntity.AddAsync(transaction);
             await _context.SaveChangesAsync();
         }
-        
     }
 }
 

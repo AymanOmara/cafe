@@ -77,8 +77,6 @@ namespace cafe.infrastructure
 
         public DbSet<ShiftEntity> Shifts { get; set; }
         
-
-
         public async Task SeedAdminUser(UserManager<CafeUser> userManager)
         {
             var adminEmail = "ayman55@gmail.com";
