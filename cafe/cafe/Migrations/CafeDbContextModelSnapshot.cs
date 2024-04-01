@@ -189,7 +189,7 @@ namespace cafe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Catgeories");
+                    b.ToTable("Catgeories", (string)null);
                 });
 
             modelBuilder.Entity("cafe.Domain.Client.Entity.ClientEntity", b =>
@@ -219,7 +219,7 @@ namespace cafe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clients");
+                    b.ToTable("Clients", (string)null);
                 });
 
             modelBuilder.Entity("cafe.Domain.Employee.EmployeeEntity", b =>
@@ -247,7 +247,7 @@ namespace cafe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("cafe.Domain.Employee.SalaryItemEntity", b =>
@@ -276,7 +276,7 @@ namespace cafe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SalaryItemEntity");
+                    b.ToTable("SalaryItemEntity", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("SalaryItemEntity");
 
@@ -327,7 +327,7 @@ namespace cafe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Events");
+                    b.ToTable("Events", (string)null);
                 });
 
             modelBuilder.Entity("cafe.Domain.Meal.MealEntity", b =>
@@ -358,7 +358,7 @@ namespace cafe.Migrations
 
                     b.HasIndex("CategoryEntityId");
 
-                    b.ToTable("Meals");
+                    b.ToTable("Meals", (string)null);
                 });
 
             modelBuilder.Entity("cafe.Domain.Order.Entity.OrderEntity", b =>
@@ -403,7 +403,7 @@ namespace cafe.Migrations
 
                     b.HasIndex("TableId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("cafe.Domain.Order.Entity.OrderItemEntity", b =>
@@ -432,7 +432,7 @@ namespace cafe.Migrations
 
                     b.HasIndex("OrderEntityId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("cafe.Domain.Shift.Entity.ShiftEntity", b =>
@@ -454,7 +454,7 @@ namespace cafe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Shifts");
+                    b.ToTable("Shifts", (string)null);
                 });
 
             modelBuilder.Entity("cafe.Domain.Table.Entity.TableEntity", b =>
@@ -482,7 +482,7 @@ namespace cafe.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("Tables");
+                    b.ToTable("Tables", (string)null);
 
                     b.HasData(
                         new
@@ -934,7 +934,7 @@ namespace cafe.Migrations
 
                     b.HasIndex("ShiftId");
 
-                    b.ToTable("TransactionsEntity");
+                    b.ToTable("TransactionsEntity", (string)null);
                 });
 
             modelBuilder.Entity("cafe.Domain.Users.entity.CafeUser", b =>
@@ -1015,7 +1015,7 @@ namespace cafe.Migrations
 
                     b.HasIndex("EmployeeEntityId");
 
-                    b.ToTable("SalaryItemEntity", t =>
+                    b.ToTable("SalaryItemEntity", null, t =>
                         {
                             t.Property("EmployeeEntityId")
                                 .HasColumnName("SalaryDeductionEntity_EmployeeEntityId");
@@ -1048,7 +1048,7 @@ namespace cafe.Migrations
 
                     b.HasIndex("EmployeeEntityId");
 
-                    b.ToTable("SalaryItemEntity", t =>
+                    b.ToTable("SalaryItemEntity", null, t =>
                         {
                             t.Property("EmployeeEntityId")
                                 .HasColumnName("PayAdvance_EmployeeEntityId");

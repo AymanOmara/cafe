@@ -29,6 +29,7 @@ namespace cafe.infrastructure
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             /// ********* Employee **********
             new EmployeeConiguration().Configure(builder.Entity<EmployeeEntity>());
 

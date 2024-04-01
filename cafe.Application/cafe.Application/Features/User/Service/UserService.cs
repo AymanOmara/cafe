@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Common;
+﻿using cafe.Common;
+using cafe.Domain.Common;
 using cafe.Domain.Users.DTO;
 using cafe.Domain.Users.Service;
 
@@ -7,10 +8,12 @@ namespace cafe.Application.Features.User.Service
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly LanguageService _localization;
 
-        public UserService(IUnitOfWork userRepository)
+        public UserService(IUnitOfWork userRepository, LanguageService localization)
         {
             _unitOfWork = userRepository;
+            _localization = localization;
         }
 
         public async Task<BaseResponse<bool>> CreateUser(RegistrationDTO registration)
@@ -45,7 +48,7 @@ namespace cafe.Application.Features.User.Service
             {
                 return new BaseResponse<TokenDTO>() { message = result.Error.Message, statusCode = 400 };
             }
-            return new BaseResponse<TokenDTO>() { message = "success", statusCode = 200, data = result.Value };
+            return new BaseResponse<TokenDTO>() { message = _localization.Getkey("success").Value, statusCode = 200, data = result.Value };
         }
 
         public async Task<BaseResponse<TokenDTO>> RefreshToken(TokenDTO dto)
@@ -55,7 +58,7 @@ namespace cafe.Application.Features.User.Service
             {
                 return new BaseResponse<TokenDTO>() { message = result.Error.Message, statusCode = 400 };
             }
-            return new BaseResponse<TokenDTO>() { message = "success", statusCode = 200, data = result.Value };
+            return new BaseResponse<TokenDTO>() { message = _localization.Getkey("success").Value, statusCode = 200, data = result.Value };
         }
     }
 }

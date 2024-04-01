@@ -22,6 +22,7 @@ using cafe.infrastructure.Features.Transaction.Repository;
 using cafe.infrastructure.Features.User.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using cafe.Common;
 
 namespace cafe.infrastructure.Common
 {
@@ -31,6 +32,7 @@ namespace cafe.infrastructure.Common
         public readonly UserManager<CafeUser> _userManager;
         public readonly SignInManager<CafeUser> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly LanguageService _localization;
 
         /// ********* Repositories **********
         public IUserRepository Users { get; private set; }
@@ -49,22 +51,23 @@ namespace cafe.infrastructure.Common
 
         public IShiftRepository Shifts { get; private set; }
 
-        public ITableRepository Tables { get;private set; }
+        public ITableRepository Tables { get; private set; }
 
-        public ITransactionRepository Transactions { get;private set; }
+        public ITransactionRepository Transactions { get; private set; }
 
 
         public UnitOfWork(CafeDbContext context,
             UserManager<CafeUser> userManager,
             SignInManager<CafeUser> signInManager,
-            IConfiguration configuration
+            IConfiguration configuration,
+            LanguageService localization
             )
         {
             _context = context;
             _configuration = configuration;
             _signInManager = signInManager;
             _userManager = userManager;
-
+            _localization = localization;
 
             InitializeRepositories();
         }
@@ -81,10 +84,11 @@ namespace cafe.infrastructure.Common
         }
         private void InitializeRepositories()
         {
-            Users = new UserRepository(_userManager,
+            Users = new UserRepository(
+                _userManager,
                 _signInManager,
                 _configuration,
-                _context);
+                _context,_localization);
             Categories = new CategoryRepository(_context);
 
             Clients = new ClientRepository(_context);
@@ -105,4 +109,3 @@ namespace cafe.infrastructure.Common
         }
     }
 }
-

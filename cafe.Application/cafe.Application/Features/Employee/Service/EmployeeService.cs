@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using cafe.Common;
 using cafe.Domain.Common;
 using cafe.Domain.Employee;
 using cafe.Domain.Employee.Dto;
@@ -11,10 +12,14 @@ namespace cafe.Application.Features.Employee.Service
         private readonly IMapper _mapper;
 
         private readonly IUnitOfWork _unitOfWork;
-        public EmployeeService(IMapper mapper, IUnitOfWork unitOfWork)
+
+        private readonly LanguageService _localization;
+
+        public EmployeeService(IMapper mapper, IUnitOfWork unitOfWork, LanguageService localization)
 		{
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _localization = localization;
 		}
 
         public async Task<ReadEmployeeDTO> CreateEmployee(CreateEmployeeDTO dto)

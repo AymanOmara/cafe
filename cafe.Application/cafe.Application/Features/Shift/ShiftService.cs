@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using cafe.Application.Common;
+using cafe.Common;
 using cafe.Domain.Common;
 using cafe.Domain.Shift;
 using cafe.Domain.Shift.DTO;
@@ -13,10 +14,13 @@ namespace cafe.Application.Features.Shift
 
         private readonly IMapper _mapper;
 
-        public ShiftService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly LanguageService _localization;
+
+        public ShiftService(IUnitOfWork unitOfWork, IMapper mapper, LanguageService localization)
 		{
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _localization = localization;
 		}
 
         public async Task<BaseResponse<bool>> CloseCurrentShift()
@@ -34,7 +38,7 @@ namespace cafe.Application.Features.Shift
             var result = await _unitOfWork.Shifts.GetCurrentActiveShift();
             if (result == null)
             {
-                return new BaseResponse<ReadShiftDTO?> { statusCode = 400, message = "no current active shift"};
+                return new BaseResponse<ReadShiftDTO?> { statusCode = 400, message = _localization.Getkey("no_current_active_shift").Value};
             }
             var mappedResult = _mapper.Map<ReadShiftDTO>(result);
             return new BaseResponse<ReadShiftDTO?> {statusCode = 200,data = mappedResult, success = true };
@@ -55,7 +59,7 @@ namespace cafe.Application.Features.Shift
         {
             var result = await _unitOfWork.Shifts.GetShiftDetails(shiftId:shiftId);
             var mappedResult = _mapper.Map<ShiftDetailsDTO>(result);
-            return new BaseResponse<ShiftDetailsDTO?> {data = mappedResult,statusCode = 200,message = "",success = true};
+            return new BaseResponse<ShiftDetailsDTO?> {data = mappedResult,statusCode = 200,message = _localization.Getkey("success").Value,success = true};
         }
 
         public async Task<BaseResponse<ReadShiftDTO>> StartNewShift()

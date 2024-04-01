@@ -14,5 +14,6 @@
   <ItemGroup>
     <ProjectReference Include="..\cafe.Application\cafe.Application\cafe.Application.csproj" />
     <ProjectReference Include="..\cafe.infrastructure\cafe.infrastructure\cafe.infrastructure.csproj" />
+    <ProjectReference Include="..\cafe.Common\cafe.Common\cafe.Common.csproj" />
   </ItemGroup>
 </Project>

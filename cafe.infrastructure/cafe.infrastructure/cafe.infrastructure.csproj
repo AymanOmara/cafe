@@ -6,8 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\cafe.Domain\cafe.Domain\cafe.Domain.csproj" />
+    <ProjectReference Include="..\..\cafe.Common\cafe.Common\cafe.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Features\" />
@@ -17,7 +21,6 @@
     <None Remove="Features\Meal\Repository\" />
     <None Remove="Features\Employee\" />
     <None Remove="Features\Employee\Repository\" />
-    <None Remove="IOC\" />
     <None Remove="Features\Table\" />
     <None Remove="Features\Table\Repository\" />
     <None Remove="Features\Client\" />
@@ -50,7 +53,6 @@
     <Folder Include="Features\Meal\Repository\" />
     <Folder Include="Features\Employee\" />
     <Folder Include="Features\Employee\Repository\" />
-    <Folder Include="IOC\" />
     <Folder Include="Features\Table\" />
     <Folder Include="Features\Table\Repository\" />
     <Folder Include="Features\Client\" />

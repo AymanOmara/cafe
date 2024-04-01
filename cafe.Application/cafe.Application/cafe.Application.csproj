@@ -13,8 +13,6 @@
     <None Remove="Features\Meal\" />
     <None Remove="Features\Employee\" />
     <None Remove="Features\Employee\Service\" />
-    <None Remove="Features\Employee\DTO\" />
-    <None Remove="Features\Category\DTO\" />
     <None Remove="Features\Table\" />
     <None Remove="Features\Table\Service\" />
     <None Remove="Features\Client\" />
@@ -39,8 +37,6 @@
     <Folder Include="Features\Meal\" />
     <Folder Include="Features\Employee\" />
     <Folder Include="Features\Employee\Service\" />
-    <Folder Include="Features\Employee\DTO\" />
-    <Folder Include="Features\Category\DTO\" />
     <Folder Include="Features\Table\" />
     <Folder Include="Features\Table\Service\" />
     <Folder Include="Features\Client\" />
@@ -59,5 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\cafe.Domain\cafe.Domain\cafe.Domain.csproj" />
+    <ProjectReference Include="..\..\cafe.Common\cafe.Common\cafe.Common.csproj" />
   </ItemGroup>
 </Project>

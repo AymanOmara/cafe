@@ -9,9 +9,16 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using cafe.Utils;
+using Microsoft.Extensions.Options;
+using System.Reflection;
+using cafe.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContext<CafeDbContext>((options) =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), migration => migration.MigrationsAssembly("cafe"));
+});
 
 builder.Services.AddIdentity<CafeUser, IdentityRole>()
     .AddEntityFrameworkStores<CafeDbContext>()
@@ -32,6 +39,15 @@ builder.Services.AddSwaggerGen(options =>
 
 /// ********* IOC Container **********
 builder.Services.RegisterServices(builder.Configuration);
+
+
+//localization
+builder.Services.AddMvc().AddViewLocalization().AddDataAnnotationsLocalization(options =>
+    options.DataAnnotationLocalizerProvider = (type, factory) =>
+    {
+        var assemblyName = new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName);
+        return factory.Create(nameof(SharedResource), assemblyName.Name);
+    });
 
 
 builder.Services.AddAuthentication(options =>
@@ -58,10 +74,17 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
+
+builder.Services
+    .AddControllers()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
+
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 { 
@@ -78,6 +101,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
+app.UseRequestLocalization(localizationOptions.Value);
 app.UseHttpsRedirection();
 app.ConfigureExceptionHandler();
 app.UseAuthentication();

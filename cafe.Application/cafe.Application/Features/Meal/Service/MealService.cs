@@ -3,17 +3,21 @@ using cafe.Domain.Meal;
 using cafe.Application.Features.Meal.DTO;
 using cafe.Domain.Features.Meal.Service;
 using cafe.Domain.Common;
+using cafe.Common;
 
 namespace cafe.Application.Features.Meal
 {
     public class MealService : IMealService
     {
         private readonly IUnitOfWork _unitOfWork;
+
         private readonly IMapper _mapper;
-        public MealService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly LanguageService _localization;
+        public MealService(IUnitOfWork unitOfWork, IMapper mapper, LanguageService localization)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _localization = localization;
         }
 
         public async Task<ReadOnlyMealDto> AddMeal(WriteOnlyMealDto dto)

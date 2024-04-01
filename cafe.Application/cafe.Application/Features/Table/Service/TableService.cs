@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using cafe.Common;
 using cafe.Domain.Common;
 using cafe.Domain.Table.DTO;
 using cafe.Domain.Table.Repository;
@@ -10,10 +11,14 @@ namespace cafe.Application.Features.Table.Service
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public TableService(IMapper mapper, IUnitOfWork unitOfWork)
+        private readonly LanguageService _localization;
+        public TableService(IMapper mapper, IUnitOfWork unitOfWork, LanguageService localization)
 		{
             _mapper = mapper;
+
             _unitOfWork = unitOfWork;
+
+            _localization = localization;
 		}
 
         public async Task<ICollection<ReadTableDTO>> GetAllTables()

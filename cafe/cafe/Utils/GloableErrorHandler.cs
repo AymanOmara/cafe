@@ -18,7 +18,6 @@ namespace cafe.Utils
 
                     await context.Response.WriteAsync(new BaseResponse<string>()
                     {
-                        data = "somthing wnet wrong tray agian later",
                         statusCode = context.Response.StatusCode,
                         message = $"Internal Server Error.{contextFeature.Error.Data}"
                     }.ToString());

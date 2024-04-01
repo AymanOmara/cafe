@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using cafe.Common;
 using cafe.Domain.Common;
 using cafe.Domain.Users.DTO;
 using cafe.Domain.Users.entity;
@@ -18,12 +19,14 @@ namespace cafe.infrastructure.Features.User.Repository
         public readonly SignInManager<CafeUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly CafeDbContext _context;
-        public UserRepository(UserManager<CafeUser> userManager, SignInManager<CafeUser> signInManager, IConfiguration configuration, CafeDbContext context)
+        private readonly LanguageService _localization;
+        public UserRepository(UserManager<CafeUser> userManager, SignInManager<CafeUser> signInManager, IConfiguration configuration, CafeDbContext context, LanguageService localization)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _configuration = configuration;
             _context = context;
+            _localization = localization;
         }
 
         public async Task<Result<string, Exception>> CreateUser(RegistrationDTO registration)
@@ -31,7 +34,7 @@ namespace cafe.infrastructure.Features.User.Repository
             var isUserExict = await IsUserExist(registration.UserName, registration.Email);
             if (isUserExict)
             {
-                return new Exception("Username or email already exists.");
+                return new Exception(_localization.Getkey("user_already_exists").Value);
 
             }
             CafeUser user = new()
@@ -49,7 +52,7 @@ namespace cafe.infrastructure.Features.User.Repository
             var role = (CafeRoles)registration.Role;
             
             await _userManager.AddToRoleAsync(user, role.ToString());
-            return "user created success fully";
+            return _localization.Getkey("user_created_success_fully").Value;
         }
 
 
@@ -57,7 +60,7 @@ namespace cafe.infrastructure.Features.User.Repository
         {
             var user = _context.Users.Where(U => U.RefreshToken == dto.RefreshToken).FirstOrDefault();
             if (user == null) {
-                return new Exception("not found");
+                return new Exception(_localization.Getkey("token_not_found").Value);
             }
             var token = await CreateJwtToken(user);
             user.RefreshToken = token.RefreshToken;
@@ -74,12 +77,14 @@ namespace cafe.infrastructure.Features.User.Repository
         public async Task<Result<TokenDTO, Exception>> Login(LoginDTO login)
         {
             var user = await _userManager.FindByNameAsync(login.UserName);
+            var cv = _localization;
             if (user == null) {
-                return new Exception("not found");
+                
+                return new Exception(_localization.Getkey("invalid_user_name").Value);
             }
             var result = await _userManager.CheckPasswordAsync(user, login.Password);
             if (!result) {
-                return new Exception("wrong password");
+                return new Exception(_localization.Getkey("invalid_password").Value);
             }
             var token = await CreateJwtToken(user);
             user.RefreshToken = token.RefreshToken;

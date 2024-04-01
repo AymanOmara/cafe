@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using cafe.Common;
 using cafe.Domain.Client.DTO;
 using cafe.Domain.Client.Entity;
 using cafe.Domain.Client.Service;
@@ -13,10 +14,13 @@ namespace cafe.Application.Features.Client.Service
 
         private readonly IUnitOfWork _unitOfWork;
 
-        public ClientService(IMapper mapper, IUnitOfWork unitOfWork)
+        private readonly LanguageService _localization;
+
+        public ClientService(IMapper mapper, IUnitOfWork unitOfWork, LanguageService localization)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _localization = localization;
         }
 
         public async Task<ReadClientDTO> AddClient(WriteClientDTO dto)
