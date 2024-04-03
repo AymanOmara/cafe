@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Meal;
+﻿using cafe.Common;
+using cafe.Domain.Meal;
 using cafe.Domain.Meal.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,9 +8,11 @@ namespace cafe.infrastructure.Features.Meal.Repository
     public class MealRepository : IMealRepository
     {
         private readonly CafeDbContext _context;
-        public MealRepository(CafeDbContext context)
+        private readonly LanguageService _localization;
+        public MealRepository(CafeDbContext context, LanguageService localization)
         {
             _context = context;
+            _localization = localization;
         }
 
         public async Task<MealEntity> Create(MealEntity meal)

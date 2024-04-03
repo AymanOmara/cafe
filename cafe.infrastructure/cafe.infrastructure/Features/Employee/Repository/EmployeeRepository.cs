@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Employee;
+﻿using cafe.Common;
+using cafe.Domain.Employee;
 using cafe.Domain.Employee.Repository;
 using cafe.Domain.Transaction.Entity;
 using Microsoft.EntityFrameworkCore;
@@ -8,10 +9,11 @@ namespace cafe.infrastructure.Features.Employee.Repository
     public class EmployeeRepository : IEmployeeRepository
     {
         private readonly CafeDbContext _context;
-
-        public EmployeeRepository(CafeDbContext context)
+        private readonly LanguageService _localization;
+        public EmployeeRepository(CafeDbContext context, LanguageService localization)
         {
             _context = context;
+            _localization = localization;
         }
 
         public async Task<EmployeeEntity> Create(EmployeeEntity employeeEntity)

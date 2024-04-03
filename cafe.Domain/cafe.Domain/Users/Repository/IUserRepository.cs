@@ -13,6 +13,10 @@ namespace cafe.Domain.Users.Repository
 
         Task<Result<TokenDTO, Exception>> RefreshToken(TokenDTO token);
 
-	}
+        Task<ICollection<UserDTO>> GetAllUsers();
+
+        Task<Result<bool, Exception>> DeleteUser(string userId);
+
+    }
 }
 

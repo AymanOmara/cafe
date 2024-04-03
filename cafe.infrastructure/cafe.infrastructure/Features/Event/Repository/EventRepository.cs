@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Event.Entity;
+﻿using cafe.Common;
+using cafe.Domain.Event.Entity;
 using cafe.Domain.Event.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,10 +8,11 @@ namespace cafe.infrastructure.Features.Event
     public class EventRepository : IEventRepository
     {
         private readonly CafeDbContext _context;
-
-        public EventRepository(CafeDbContext context)
+        private readonly LanguageService _localization;
+        public EventRepository(CafeDbContext context, LanguageService localization)
         {
             _context = context;
+            _localization = localization;
         }
 
         public async Task<EventEntity> CheckOut(EventEntity eventEntity)

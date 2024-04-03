@@ -2,7 +2,6 @@
 using cafe.Common;
 using cafe.Domain.Common;
 using cafe.Domain.Table.DTO;
-using cafe.Domain.Table.Repository;
 using cafe.Domain.Table.Service;
 
 namespace cafe.Application.Features.Table.Service
@@ -24,7 +23,7 @@ namespace cafe.Application.Features.Table.Service
         public async Task<ICollection<ReadTableDTO>> GetAllTables()
         {
             var result = await _unitOfWork.Tables.GetAllTables();
-            return _mapper.Map<List<ReadTableDTO>>(result.Where(table => !table.Deleted).ToList());
+            return _mapper.Map<List<ReadTableDTO>>(result);
         }
     }
 }

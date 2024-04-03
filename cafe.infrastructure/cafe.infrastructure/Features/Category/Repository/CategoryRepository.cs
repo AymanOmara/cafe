@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Category;
+﻿using cafe.Common;
+using cafe.Domain.Category;
 using cafe.Domain.Category.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,9 +9,12 @@ namespace cafe.infrastructure.Features.Category.Repository
     {
         private readonly CafeDbContext _context;
 
-        public CategoryRepository(CafeDbContext context)
+        private readonly LanguageService _localization;
+
+        public CategoryRepository(CafeDbContext context, LanguageService localization)
         {
             _context = context;
+            _localization = localization;
         }
 
         public async Task<CategoryEntity> Create(CategoryEntity category)

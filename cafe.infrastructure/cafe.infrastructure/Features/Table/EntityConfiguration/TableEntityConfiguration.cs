@@ -16,6 +16,9 @@ namespace cafe.infrastructure.Features.Table.EntityConfiguration
             {
                 builder.HasData(new TableEntity() { Id = i, Name = $"{i}", LobbyName = LobbyName.Outside });
             }
+
+            builder
+                .HasQueryFilter(table => !table.Deleted);
         }
     }
 }

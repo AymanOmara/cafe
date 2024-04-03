@@ -15,6 +15,7 @@ using cafe.infrastructure.Features.Roles.EntityConfiguration;
 using cafe.infrastructure.Features.Shift.EntityConfiguration;
 using cafe.infrastructure.Features.Table.EntityConfiguration;
 using cafe.infrastructure.Features.Transaction.EntityConfiguration;
+using cafe.infrastructure.Features.User.EntityConfiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -54,6 +55,9 @@ namespace cafe.infrastructure
 
             /// ********* Shift **********
             new ShiftEntityConfiguration().Configure(builder.Entity<ShiftEntity>());
+
+            /// ********* User **********
+            new UserEntityConfiguration().Configure(builder.Entity<CafeUser>());
 
             base.OnModelCreating(builder);
         }

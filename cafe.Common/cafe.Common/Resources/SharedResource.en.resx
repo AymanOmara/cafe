@@ -51,4 +51,16 @@
     <data name="no_current_active_shift" xml:space="preserve">
         <value>No current active shift</value>
     </data>
+    <data name="error_start_shift_first" xml:space="preserve">
+        <value>Start the shift first before starting</value>
+    </data>
+    <data name="please_close_current_shift_first" xml:space="preserve">
+        <value>Please close the current shift first</value>
+    </data>
+    <data name="the_table_alerdy_has_active_order" xml:space="preserve">
+        <value>The table already has an active order</value>
+    </data>
+    <data name="error_try_later" xml:space="preserve">
+        <value>An error occurred, please try again later</value>
+    </data>
 </root>

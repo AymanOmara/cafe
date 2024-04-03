@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Transaction.Entity;
+﻿using cafe.Common;
+using cafe.Domain.Transaction.Entity;
 using cafe.Domain.Transaction.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,10 +8,12 @@ namespace cafe.infrastructure.Features.Transaction.Repository
 	public class TransactionRepository: ITransactionRepository
     {
         private readonly CafeDbContext _context;
-
-		public TransactionRepository(CafeDbContext context)
+        private readonly LanguageService _localization;
+        public TransactionRepository(CafeDbContext context, LanguageService localization)
 		{
             _context = context;
+
+            _localization = localization;
 		}
 
         public async Task<TransactionEntity> CreateTransaction(TransactionEntity transactionEntity)

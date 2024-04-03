@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Table.Entity;
+﻿using cafe.Common;
+using cafe.Domain.Table.Entity;
 using cafe.Domain.Table.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,9 +8,11 @@ namespace cafe.infrastructure.Features.Table.Repository
     public class TableRepository : ITableRepository
     {
         private readonly CafeDbContext _context;
-        public TableRepository(CafeDbContext context)
+        private readonly LanguageService _localization;
+        public TableRepository(CafeDbContext context, LanguageService localization)
         {
             _context = context;
+            _localization = localization;
         }
 
         public async Task<TableEntity> CreateTable(TableEntity entity)

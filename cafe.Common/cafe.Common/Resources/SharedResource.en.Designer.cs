@@ -76,11 +76,29 @@ namespace cafe.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start the shift first before starting.
+        /// </summary>
+        internal static string error_start_shift_first {
+            get {
+                return ResourceManager.GetString("error_start_shift_first", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error, please try again later.
         /// </summary>
         internal static string error_try_again_later {
             get {
                 return ResourceManager.GetString("error_try_again_later", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred, please try again later.
+        /// </summary>
+        internal static string error_try_later {
+            get {
+                return ResourceManager.GetString("error_try_later", resourceCulture);
             }
         }
         
@@ -130,6 +148,15 @@ namespace cafe.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please close the current shift first.
+        /// </summary>
+        internal static string please_close_current_shift_first {
+            get {
+                return ResourceManager.GetString("please_close_current_shift_first", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reserving past dates is not allowed.
         /// </summary>
         internal static string reserve_past_date_not_allowed {
@@ -144,6 +171,15 @@ namespace cafe.Common.Resources {
         internal static string success {
             get {
                 return ResourceManager.GetString("success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The table already has an active order.
+        /// </summary>
+        internal static string the_table_alerdy_has_active_order {
+            get {
+                return ResourceManager.GetString("the_table_alerdy_has_active_order", resourceCulture);
             }
         }
         

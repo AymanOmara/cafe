@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Client.Entity;
+﻿using cafe.Common;
+using cafe.Domain.Client.Entity;
 using cafe.Domain.Client.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,9 +8,11 @@ namespace cafe.infrastructure.Features.Client.Repository
     public class ClientRepository : IClientRepository
     {
         private readonly CafeDbContext _context;
-        public ClientRepository(CafeDbContext context)
+        private readonly LanguageService _localization;
+        public ClientRepository(CafeDbContext context, LanguageService localization)
         {
             _context = context;
+            _localization = localization;
         }
 
         public async Task<ClientEntity> Create(ClientEntity client)

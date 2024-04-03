@@ -89,23 +89,23 @@ namespace cafe.infrastructure.Common
                 _signInManager,
                 _configuration,
                 _context,_localization);
-            Categories = new CategoryRepository(_context);
+            Categories = new CategoryRepository(_context, _localization);
 
-            Clients = new ClientRepository(_context);
+            Clients = new ClientRepository(_context, _localization);
 
-            Employees = new EmployeeRepository(_context);
+            Employees = new EmployeeRepository(_context, _localization);
 
-            Events = new EventRepository(_context);
+            Events = new EventRepository(_context, _localization);
 
-            Meals = new MealRepository(_context);
+            Meals = new MealRepository(_context, _localization);
 
-            Orders = new OrderRepository(_context);
+            Orders = new OrderRepository(_context, _localization);
 
-            Shifts = new ShiftRepository(_context);
+            Shifts = new ShiftRepository(_context, _localization);
 
-            Tables = new TableRepository(_context);
+            Tables = new TableRepository(_context, _localization);
 
-            Transactions = new TransactionRepository(_context);
+            Transactions = new TransactionRepository(_context, _localization);
         }
     }
 }

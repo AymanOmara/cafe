@@ -29,16 +29,19 @@ namespace cafe.Application.Features.User.Service
             }
         }
 
-        //todo
-        public Task<BaseResponse<string>> DeleteUSer(string userName)
+        public async Task<BaseResponse<bool>> DeleteUser(string userId)
         {
-            throw new NotImplementedException();
+            var reuslt = await _unitOfWork.Users.DeleteUser(userId);
+            if (!reuslt.IsOk) {
+                return new BaseResponse<bool> { data = false,statusCode = 400,message = _localization.Getkey("error_try_later").Value};
+            }
+            return new BaseResponse<bool> { statusCode = 200,message = _localization.Getkey("success").Value,data =true};
         }
 
-        //todo
-        public Task<BaseResponse<string>> GetAllUsers()
+        public async Task<BaseResponse<ICollection<UserDTO>>> GetAllUsers()
         {
-            throw new NotImplementedException();
+            var result = await _unitOfWork.Users.GetAllUsers();
+            return new BaseResponse<ICollection<UserDTO>> { data = result , statusCode = 200, success = true };
         }
 
         public async Task<BaseResponse<TokenDTO>> Login(LoginDTO login)

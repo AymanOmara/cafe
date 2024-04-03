@@ -56,6 +56,7 @@ namespace cafe.Application
             /// ********* Order **********
             services.AddScoped<IOrderService, OrderService>();
 
+            /// ********* AutoMapper **********
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 	}

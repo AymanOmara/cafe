@@ -15,8 +15,8 @@ namespace cafe.Controllers
 			_userService = userService;
         }
 
-		[Authorize(Roles = "Admin")]
-		[HttpPost("CreateUser")]
+        [Authorize(Roles = "Admin")]
+        [HttpPost("CreateUser")]
 		public async Task<IActionResult> CreateUser([FromBody] RegistrationDTO dto) {
 			var result = await _userService.CreateUser(dto);
             return result.ToResultResponse();
@@ -35,6 +35,22 @@ namespace cafe.Controllers
         public async Task<IActionResult> RefreshToken([FromBody] TokenDTO dto)
         {
             var result = await _userService.RefreshToken(dto);
+            return result.ToResultResponse();
+        }
+
+        //[AllowAnonymous]
+        [Authorize(Roles = "Admin")]
+        [HttpGet("GetAllUsers")]
+        public async Task<IActionResult> GetAllUsers() {
+            var result = await _userService.GetAllUsers();
+            return result.ToResultResponse();
+        }
+
+        [AllowAnonymous]
+        //[Authorize(Roles = "Admin")]
+        [HttpDelete("DeleteUser")]
+        public async Task<IActionResult> DeleteUser(string userId) {
+            var result = await _userService.DeleteUser(userId);
             return result.ToResultResponse();
         }
     }

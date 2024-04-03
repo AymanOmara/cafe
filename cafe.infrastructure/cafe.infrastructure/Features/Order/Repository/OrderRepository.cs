@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Common;
+﻿using cafe.Common;
+using cafe.Domain.Common;
 using cafe.Domain.Order.Entity;
 using cafe.Domain.Order.Repository;
 using cafe.Domain.Transaction.Entity;
@@ -10,9 +11,12 @@ namespace cafe.infrastructure.Features.Order.Repository
     {
         private readonly CafeDbContext _context;
 
-        public OrderRepository(CafeDbContext context)
+        private readonly LanguageService _localization;
+
+        public OrderRepository(CafeDbContext context,LanguageService localization)
         {
             _context = context;
+            _localization = localization;
         }
 
         public async Task<Result<OrderEntity, Exception>> Create(OrderEntity entity)
@@ -22,7 +26,7 @@ namespace cafe.infrastructure.Features.Order.Repository
             var hasActiveOrder = attachedTable?.Orders.Any(order => order.IsActive == true);
             if (hasActiveOrder == true)
             {
-                return new Exception("the table alerdy has active order");
+                return new Exception(_localization.Getkey("the_table_alerdy_has_active_order").Value);
             }
             
             if (entity.IsTakeAway) {

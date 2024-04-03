@@ -10,10 +10,10 @@ namespace cafe.Domain.Users.Service
         Task<BaseResponse<TokenDTO>> Login(LoginDTO login);
 
         Task<BaseResponse<TokenDTO>> RefreshToken(TokenDTO dto);
-
-        Task<BaseResponse<string>> DeleteUSer(string userName);
         
-        Task<BaseResponse<string>> GetAllUsers();
+        Task<BaseResponse<ICollection<UserDTO>>> GetAllUsers();
+
+        Task<BaseResponse<bool>> DeleteUser(string userId);
     }
 }
 

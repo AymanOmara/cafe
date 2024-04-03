@@ -1,4 +1,5 @@
-﻿using cafe.Domain.Common;
+﻿using cafe.Common;
+using cafe.Domain.Common;
 using cafe.Domain.Order.Entity;
 using cafe.Domain.Shift;
 using cafe.Domain.Shift.Entity;
@@ -9,10 +10,11 @@ namespace cafe.infrastructure.Features.Shift
     public class ShiftRepository : IShiftRepository
     {
         private readonly CafeDbContext _context;
-
-        public ShiftRepository(CafeDbContext context)
+        private readonly LanguageService _localization;
+        public ShiftRepository(CafeDbContext context, LanguageService localization)
         {
             _context = context;
+            _localization = localization;
         }
 
         public async Task<Result<bool, Exception>> CloseCurrentShift()
@@ -20,7 +22,7 @@ namespace cafe.infrastructure.Features.Shift
             var isCurrentShiftOpen = await IsCurrentShiftOpen();
             if (!isCurrentShiftOpen)
             {
-                return new Exception("please start shift first");
+                return new Exception(_localization.Getkey("error_start_shift_first").Value);
             }
             var currentShift = await _context
                 .Shifts
@@ -66,7 +68,7 @@ namespace cafe.infrastructure.Features.Shift
 
             if (isCurrentShiftOpen)
             {
-                return new Exception("please close current shift first");
+                return new Exception(_localization.Getkey("please_close_current_shift_first").Value);
             }
             var shiftEntity = new ShiftEntity() { };
             await _context.Shifts.AddAsync(shiftEntity);

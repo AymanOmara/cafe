@@ -8,6 +8,7 @@ using cafe.Domain.Users.DTO;
 using cafe.Domain.Users.entity;
 using cafe.Domain.Users.Repository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -44,13 +45,14 @@ namespace cafe.infrastructure.Features.User.Repository
                 EmailConfirmed = true,
             };
 
-            var result = await _userManager.CreateAsync(user,registration.Password);
+            var result = await _userManager.CreateAsync(user, registration.Password);
 
-            if (!result.Succeeded) {
-                return new Exception(String.Join(",", result.Errors.ToList()));
+            if (!result.Succeeded)
+            {
+                return new Exception(string.Join(",", result.Errors.ToList()));
             }
             var role = (CafeRoles)registration.Role;
-            
+
             await _userManager.AddToRoleAsync(user, role.ToString());
             return _localization.Getkey("user_created_success_fully").Value;
         }
@@ -59,7 +61,8 @@ namespace cafe.infrastructure.Features.User.Repository
         public async Task<Result<TokenDTO, Exception>> RefreshToken(TokenDTO dto)
         {
             var user = _context.Users.Where(U => U.RefreshToken == dto.RefreshToken).FirstOrDefault();
-            if (user == null) {
+            if (user == null)
+            {
                 return new Exception(_localization.Getkey("token_not_found").Value);
             }
             var token = await CreateJwtToken(user);
@@ -67,23 +70,38 @@ namespace cafe.infrastructure.Features.User.Repository
             await _userManager.UpdateAsync(user);
             return token;
         }
-        public async Task<bool> IsUserExist(String userName, String email)
+
+        public async Task<bool> IsUserExist(string userName, string email)
         {
             var isEmailExist = await _userManager.FindByEmailAsync(email);
             var isUserNameExist = await _userManager.FindByNameAsync(userName);
             return isEmailExist != null && isUserNameExist != null;
         }
 
+        public async Task<ICollection<UserDTO>> GetAllUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            ICollection<UserDTO> usersDto = new List<UserDTO>() { };
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                var role = string.Join(",", roles);
+                var userDTO = new UserDTO { UserId = user.Id, UserName = user.UserName, Role = role, Email = user.Email, CreatedDate = user.CreatedDate.ToString() };
+                usersDto.Add(userDTO);
+            }
+            return usersDto;
+        }
+
         public async Task<Result<TokenDTO, Exception>> Login(LoginDTO login)
         {
             var user = await _userManager.FindByNameAsync(login.UserName);
-            var cv = _localization;
-            if (user == null) {
-                
+            if (user == null || user.Deleted)
+            {
                 return new Exception(_localization.Getkey("invalid_user_name").Value);
             }
             var result = await _userManager.CheckPasswordAsync(user, login.Password);
-            if (!result) {
+            if (!result)
+            {
                 return new Exception(_localization.Getkey("invalid_password").Value);
             }
             var token = await CreateJwtToken(user);
@@ -91,6 +109,7 @@ namespace cafe.infrastructure.Features.User.Repository
             await _userManager.UpdateAsync(user);
             return token;
         }
+
         private async Task<TokenDTO> CreateJwtToken(CafeUser user)
         {
             var roles = await _userManager.GetRolesAsync(user);
@@ -117,7 +136,7 @@ namespace cafe.infrastructure.Features.User.Repository
             tokenDes.Subject.AddClaims(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
             var token = jwtTokenHandler.CreateToken(tokenDes);
             var jwtToken = jwtTokenHandler.WriteToken(token);
-            return new TokenDTO() {AccessToken = jwtToken, RefreshToken = RefreshTokenGeneration()};
+            return new TokenDTO() { AccessToken = jwtToken, RefreshToken = RefreshTokenGeneration() };
         }
 
         private string RefreshTokenGeneration()
@@ -126,6 +145,22 @@ namespace cafe.infrastructure.Features.User.Repository
             using var rng = RandomNumberGenerator.Create();
             rng.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber);
+        }
+
+        public async Task<Result<bool, Exception>> DeleteUser(string userId)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                user.Deleted = true;
+                await _userManager.UpdateAsync(user);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

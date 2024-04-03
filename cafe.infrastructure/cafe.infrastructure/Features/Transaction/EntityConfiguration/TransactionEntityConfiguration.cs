@@ -9,9 +9,13 @@ namespace cafe.infrastructure.Features.Transaction.EntityConfiguration
         public void Configure(EntityTypeBuilder<TransactionEntity> builder)
         {
 
-            builder.Property(prop => prop.Amount).IsRequired();
+            builder
+                .Property(prop => prop.Amount)
+                .IsRequired();
 
-            builder.Property(prop => prop.TransactionType).IsRequired();
+            builder
+                .Property(prop => prop.TransactionType)
+                .IsRequired();
 
         }
     }
