@@ -30,7 +30,7 @@ namespace cafe.infrastructure.Features.Category.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ICollection<CategoryEntity>> GetAllRecords()
+        public  async Task<ICollection<CategoryEntity>> GetAllRecords()
         {
             return await _context.Catgeories.ToListAsync();
         }

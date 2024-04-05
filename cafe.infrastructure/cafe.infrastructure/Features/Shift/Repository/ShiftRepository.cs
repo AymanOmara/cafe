@@ -3,6 +3,8 @@ using cafe.Domain.Common;
 using cafe.Domain.Order.Entity;
 using cafe.Domain.Shift;
 using cafe.Domain.Shift.Entity;
+using cafe.Domain.Transaction.Entity;
+using cafe.Domain.Users.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace cafe.infrastructure.Features.Shift
@@ -11,10 +13,12 @@ namespace cafe.infrastructure.Features.Shift
     {
         private readonly CafeDbContext _context;
         private readonly LanguageService _localization;
-        public ShiftRepository(CafeDbContext context, LanguageService localization)
+        private readonly IUserNotifier _userNotifier;
+        public ShiftRepository(CafeDbContext context, LanguageService localization, IUserNotifier userNotifier)
         {
             _context = context;
             _localization = localization;
+            _userNotifier = userNotifier;
         }
 
         public async Task<Result<bool, Exception>> CloseCurrentShift()
@@ -26,9 +30,14 @@ namespace cafe.infrastructure.Features.Shift
             }
             var currentShift = await _context
                 .Shifts
+                   .Include(sh => sh.Transactions)
+                   .Include(sh => sh.Orders)
+                   .ThenInclude(sh=>sh.OrderItems)
                 .FirstOrDefaultAsync(shift => shift.Closed == false);
-            currentShift.Closed = true;
+            //currentShift.Closed = true;
             await _context.SaveChangesAsync();
+            var content = CreateEmailContent(currentShift);
+            await _userNotifier.Notify("aymanomara55@gmail.com", content);
             return true;
         }
 
@@ -79,6 +88,21 @@ namespace cafe.infrastructure.Features.Shift
         private async Task<bool> IsCurrentShiftOpen()
         {
             return await _context.Shifts.AnyAsync(shift => shift.Closed == false);
+        }
+        private string CreateEmailContent(ShiftEntity shift) {
+            int? totalOrders = shift?.Orders?.Count;
+            decimal revnue = 0;
+            if (shift.Orders != null)
+            {
+                revnue = shift.Orders.Sum(or => or.TotalPrice);
+            }
+
+            decimal expenses = 0;
+            if (shift.Transactions != null) {
+                expenses = shift.Transactions.Where(trns => trns.TransactionType == TransactionType.SalaryAdvance).Sum(tras => tras.Amount);
+            }
+            var content = $"order number {totalOrders}\n total revenu: {revnue} \n total expenses:{expenses}\n";
+            return content;
         }
     }
 }

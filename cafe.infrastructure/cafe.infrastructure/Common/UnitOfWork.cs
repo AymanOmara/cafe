@@ -33,6 +33,7 @@ namespace cafe.infrastructure.Common
         public readonly SignInManager<CafeUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly LanguageService _localization;
+        private readonly IUserNotifier _userNotifier;
 
         /// ********* Repositories **********
         public IUserRepository Users { get; private set; }
@@ -60,7 +61,8 @@ namespace cafe.infrastructure.Common
             UserManager<CafeUser> userManager,
             SignInManager<CafeUser> signInManager,
             IConfiguration configuration,
-            LanguageService localization
+            LanguageService localization,
+            IUserNotifier userNotifier
             )
         {
             _context = context;
@@ -68,6 +70,7 @@ namespace cafe.infrastructure.Common
             _signInManager = signInManager;
             _userManager = userManager;
             _localization = localization;
+            _userNotifier = userNotifier;
 
             InitializeRepositories();
         }
@@ -101,7 +104,7 @@ namespace cafe.infrastructure.Common
 
             Orders = new OrderRepository(_context, _localization);
 
-            Shifts = new ShiftRepository(_context, _localization);
+            Shifts = new ShiftRepository(_context, _localization,_userNotifier);
 
             Tables = new TableRepository(_context, _localization);
 

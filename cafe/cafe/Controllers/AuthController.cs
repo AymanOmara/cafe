@@ -38,7 +38,6 @@ namespace cafe.Controllers
             return result.ToResultResponse();
         }
 
-        //[AllowAnonymous]
         [Authorize(Roles = "Admin")]
         [HttpGet("GetAllUsers")]
         public async Task<IActionResult> GetAllUsers() {
@@ -46,8 +45,7 @@ namespace cafe.Controllers
             return result.ToResultResponse();
         }
 
-        [AllowAnonymous]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("DeleteUser")]
         public async Task<IActionResult> DeleteUser(string userId) {
             var result = await _userService.DeleteUser(userId);

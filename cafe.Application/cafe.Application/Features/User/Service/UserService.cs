@@ -51,7 +51,7 @@ namespace cafe.Application.Features.User.Service
             {
                 return new BaseResponse<TokenDTO>() { message = result.Error.Message, statusCode = 400 };
             }
-            return new BaseResponse<TokenDTO>() { message = _localization.Getkey("success").Value, statusCode = 200, data = result.Value };
+            return new BaseResponse<TokenDTO>() { message = _localization.Getkey("success").Value, statusCode = 200, data = result.Value ,success = true};
         }
 
         public async Task<BaseResponse<TokenDTO>> RefreshToken(TokenDTO dto)

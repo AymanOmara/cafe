@@ -57,6 +57,7 @@
     <None Remove="Meal\DTO\" />
     <None Remove="Meal\Service\" />
     <None Remove="Order\Service\" />
+    <None Remove="Users\UserNotifier\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Category\" />
@@ -110,6 +111,7 @@
     <Folder Include="Meal\DTO\" />
     <Folder Include="Meal\Service\" />
     <Folder Include="Order\Service\" />
+    <Folder Include="Users\UserNotifier\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />

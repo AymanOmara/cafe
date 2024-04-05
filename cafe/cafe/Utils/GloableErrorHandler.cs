@@ -19,11 +19,10 @@ namespace cafe.Utils
                     await context.Response.WriteAsync(new BaseResponse<string>()
                     {
                         statusCode = context.Response.StatusCode,
-                        message = $"Internal Server Error.{contextFeature.Error.Data}"
+                        message = $"Internal Server Error.{contextFeature?.Error.Data}"
                     }.ToString());
                 });
             });
-
         }
     }
 }

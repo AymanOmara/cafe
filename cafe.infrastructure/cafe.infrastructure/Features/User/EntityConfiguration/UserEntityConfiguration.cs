@@ -1,5 +1,4 @@
-﻿using System;
-using cafe.Domain.Users.entity;
+﻿using cafe.Domain.Users.entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
