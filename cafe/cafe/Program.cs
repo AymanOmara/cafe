@@ -35,6 +35,7 @@ builder.Services.AddSwaggerGen(options =>
     });
 
     options.OperationFilter<SecurityRequirementsOperationFilter>();
+    options.OperationFilter<AddRequiredHeaderParameter>();
 });
 
 /// ********* IOC Container **********
